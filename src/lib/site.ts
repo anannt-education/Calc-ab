@@ -1,17 +1,36 @@
 import type { Metadata } from "next";
 
-/** Canonical site origin used by metadataBase, sitemap, and JSON-LD. */
-export const SITE_URL = "https://apcalc.anannt.education";
+/** Canonical host for metadataBase, sitemap, OG, and JSON-LD. Not a subject subdomain. */
+export const SITE_URL = "https://study.anannt.ae";
+export const BASE_PATH = "/calculus-ab";
 export const SITE_NAME = "Anannt Education";
-export const COURSE_NAME = "Anannt AP Calculus AB";
-export const TITLE_SUFFIX = "Anannt AP Calculus AB";
+export const COURSE_NAME = "Calculus AB";
+export const TITLE_SUFFIX = "Anannt Study";
+export const SUBJECT_SLUG = "calculus-ab";
 
-export const TRUST_LINE =
-  "Anannt Education — independent AP Calculus AB preparation. Not affiliated with or endorsed by College Board.";
+export const NAP_LINE =
+  "Anannt Education · Office 105, Bank Street Building, Burjuman Metro Exit 2, Dubai · +971 58585 3551 · wecare@anannt.ae";
+
+export const COLLEGE_BOARD_LINE =
+  "AP® is a trademark registered by the College Board, which is not affiliated with, and does not endorse, this website.";
+
+export const STUDIO_LINE =
+  "This studio is a self-study supplement. It does not predict an official AP score and is not Bluebook or AP Classroom.";
+
+export const TRUST_LINE = COLLEGE_BOARD_LINE;
 
 export function absoluteUrl(path: string) {
   const p = path.startsWith("/") ? path : `/${path}`;
-  return `${SITE_URL}${p}`;
+  if (p === "/" || p === "") return `${SITE_URL}${BASE_PATH}`;
+  if (p.startsWith(BASE_PATH)) return `${SITE_URL}${p}`;
+  return `${SITE_URL}${BASE_PATH}${p}`;
+}
+
+/** Prefix browser fetch paths so they stay under basePath. */
+export function withBasePath(path: string) {
+  const p = path.startsWith("/") ? path : `/${path}`;
+  if (p.startsWith(BASE_PATH)) return p;
+  return `${BASE_PATH}${p}`;
 }
 
 /** Strip TeX delimiters so meta descriptions stay readable. */
@@ -57,8 +76,7 @@ export function buildMetadata({
     "Anannt Education",
     "limits",
     "Fundamental Theorem of Calculus",
-    "FRQ practice",
-    "AP Calculus diagnostic",
+    "Dubai",
   ];
   return {
     title: { absolute: fullTitle },

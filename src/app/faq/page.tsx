@@ -4,11 +4,11 @@ import { JsonLd } from "@/components/JsonLd";
 import { FAQS } from "@/lib/faq-content";
 import { faqJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/site";
+import { PUBLIC_DESCRIPTIONS } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "FAQ",
-  description:
-    "Honest FAQ for Anannt AP Calculus AB: no score guarantees, self-administered mocks, mastery versus watching a lesson, 2027 format.",
+  title: "Calculus AB FAQ",
+  description: PUBLIC_DESCRIPTIONS.faq,
   path: "/faq",
 });
 

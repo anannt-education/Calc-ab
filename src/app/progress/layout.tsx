@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/site";
+import { gatedMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Progress",
-  description:
-    "Honest AP Calculus AB progress: exposure, independent evidence, retention, and review due. No fake percentages or score predictions.",
-  path: "/progress",
-});
+export const metadata: Metadata = gatedMetadata(
+  "Progress",
+  "Honest Calculus AB progress: exposure, independent evidence, retention. Session required. No score predictions.",
+  "/progress"
+);
 
 export default function ProgressLayout({ children }: { children: React.ReactNode }) {
   return children;

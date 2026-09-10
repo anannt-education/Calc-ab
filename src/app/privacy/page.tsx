@@ -1,11 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/site";
+import { PUBLIC_DESCRIPTIONS } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Privacy",
-  description:
-    "Anannt AP Calculus AB privacy note: this demo stores progress locally in your browser. Minimum data, no account wall.",
+  description: PUBLIC_DESCRIPTIONS.privacy,
   path: "/privacy",
 });
 

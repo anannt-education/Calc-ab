@@ -7,10 +7,13 @@ import { JsonLd } from "@/components/JsonLd";
 import { LessonActivity } from "@/components/LessonActivity";
 import { LessonWorkspace } from "@/components/LessonWorkspace";
 import { MathHtml } from "@/components/MathHtml";
+import { Lesson2Continue } from "@/components/Lesson2Continue";
 import { LESSON_BY_ID, LESSONS, SKILL_BY_ID, UNIT_BY_ID } from "@/lib/content";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { facultyById } from "@/lib/faculty";
 import { buildMetadata, plainText } from "@/lib/site";
+import { LESSON_1_ID, LESSON_2_ID, isPublicLessonId } from "@/lib/gate";
+import { PUBLIC_DESCRIPTIONS } from "@/lib/seo";
 
 const SHORT_TITLE: Record<string, string> = {
   "u1-limit-vs-value": "Limit versus function value",
@@ -45,22 +48,36 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const lesson = LESSON_BY_ID[id];
-  if (!lesson) return buildMetadata({ title: "Lesson", description: "Lesson not in this course slice.", path: `/lesson/${id}` });
+  if (!lesson) {
+    return buildMetadata({
+      title: "Lesson",
+      description: "Lesson not in this course slice.",
+      path: `/lesson/${id}`,
+      noIndex: true,
+    });
+  }
+  if (id === LESSON_1_ID) {
+    return buildMetadata({
+      title: "Limit versus function value",
+      description: PUBLIC_DESCRIPTIONS.lesson1,
+      path: `/lesson/${id}`,
+      type: "article",
+    });
+  }
+  if (id === LESSON_2_ID) {
+    return buildMetadata({
+      title: "FTC and accumulation",
+      description: PUBLIC_DESCRIPTIONS.lesson2,
+      path: `/lesson/${id}`,
+      type: "article",
+    });
+  }
   return buildMetadata({
     title: SHORT_TITLE[lesson.id] ?? lesson.title,
-    description: plainText(
-      `${lesson.title}. ${lesson.objective} Anannt AP Calculus AB — independent 2027 prep.`
-    ),
+    description: plainText(`${lesson.title}. ${lesson.objective} Anannt Calculus AB self-study.`),
     path: `/lesson/${id}`,
     type: "article",
-    keywords: [
-      "AP Calculus AB 2027",
-      lesson.title,
-      "Anannt Education",
-      "limits",
-      "FTC",
-      "FRQ practice",
-    ],
+    noIndex: !isPublicLessonId(id),
   });
 }
 
@@ -172,6 +189,16 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
       )}
 
       <LessonWorkspace id={id} />
+
+      {id === LESSON_1_ID && (
+        <p className="mt-8 text-sm">
+          Next public lesson:{" "}
+          <Link href={`/lesson/${LESSON_2_ID}`} className="text-primary underline-offset-2 hover:underline">
+            FTC and accumulation
+          </Link>
+        </p>
+      )}
+      {id === LESSON_2_ID && <Lesson2Continue />}
 
       <nav aria-label="Related lessons" className="mt-10 border-t pt-6">
         <h2 className="text-base font-semibold text-primary">Related in this unit</h2>

@@ -15,6 +15,7 @@ import { applyAttempt } from "@/lib/mastery";
 import { blankState, loadState, makeEvent, nowISO, saveState } from "@/lib/storage";
 import { LESSON_BY_ID } from "@/lib/content/lessons";
 import { ITEM_BY_ID } from "@/lib/content/items";
+import { withBasePath } from "@/lib/site";
 
 type StudentApi = {
   state: StudentState;
@@ -132,7 +133,7 @@ export function StudentProvider({ children }: { children: ReactNode }) {
     stateRef.current = next;
     setStateRaw(next);
     saveState(next);
-    void fetch("/api/events", {
+    void fetch(withBasePath("/api/events"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, payload }),

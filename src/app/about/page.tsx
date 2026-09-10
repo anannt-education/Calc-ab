@@ -4,11 +4,11 @@ import { AcademicMethod } from "@/components/AcademicMethod";
 import { JsonLd } from "@/components/JsonLd";
 import { programJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/site";
+import { PUBLIC_DESCRIPTIONS } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Academic approach",
-  description:
-    "How Anannt Education teaches AP Calculus AB: Concept Lens, Method Choice, Error Clinic, Reasoning Studio, and Exam Review. CED-aligned, AB scope protected.",
+  title: "How this Calculus AB studio teaches",
+  description: PUBLIC_DESCRIPTIONS.about,
   path: "/about",
 });
 

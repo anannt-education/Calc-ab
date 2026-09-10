@@ -7,6 +7,8 @@ import { MathHtml } from "@/components/MathHtml";
 import { LESSON_BY_ID, SKILL_BY_ID, UNITS, UNIT_BY_ID } from "@/lib/content";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { buildMetadata, plainText } from "@/lib/site";
+import { PUBLIC_DESCRIPTIONS } from "@/lib/seo";
+import { isPublicLessonId } from "@/lib/gate";
 
 export function generateStaticParams() {
   return UNITS.map((u) => ({ unitId: u.id }));
@@ -19,12 +21,26 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { unitId } = await params;
   const unit = UNIT_BY_ID[unitId];
-  if (!unit) return buildMetadata({ title: "Unit", description: "Unit not in this course.", path: `/course/${unitId}` });
+  if (!unit) return buildMetadata({ title: "Unit", description: "Unit not in this course.", path: `/course/${unitId}`, noIndex: true });
+  if (unitId === "u1") {
+    return buildMetadata({
+      title: "Unit 1 Limits and Continuity",
+      description: PUBLIC_DESCRIPTIONS.unit1,
+      path: `/course/${unitId}`,
+    });
+  }
+  if (unitId === "u6") {
+    return buildMetadata({
+      title: "Unit 6 Integration and FTC",
+      description: PUBLIC_DESCRIPTIONS.unit6,
+      path: `/course/${unitId}`,
+    });
+  }
   return buildMetadata({
     title: unit.number === "F" ? "Foundation bridge" : unitShortTitle(unit),
     description: plainText(`${unit.officialLabel}. ${unit.overview} MCQ weight ${unit.mcqWeight}.`),
     path: `/course/${unitId}`,
-    keywords: ["AP Calculus AB 2027", unit.title, "Anannt Education", "limits", "FTC"],
+    noIndex: true,
   });
 }
 
@@ -90,10 +106,17 @@ export default async function UnitPage({ params }: { params: Promise<{ unitId: s
             return (
               <li key={id} className="rounded-xl border bg-card p-4">
                 <h3 className="font-medium">
-                  <Link href={`/lesson/${id}`} className="text-primary underline-offset-2 hover:underline">
-                    {lesson.title}
-                  </Link>
+                  {isPublicLessonId(id) ? (
+                    <Link href={`/lesson/${id}`} className="text-primary underline-offset-2 hover:underline">
+                      {lesson.title}
+                    </Link>
+                  ) : (
+                    <span>{lesson.title}</span>
+                  )}
                 </h3>
+                {!isPublicLessonId(id) && (
+                  <p className="mt-1 text-xs text-muted-foreground">Opens after the two public lessons and the study gate.</p>
+                )}
                 <p className="mt-1 text-sm">
                   <MathHtml text={lesson.objective} />
                 </p>
@@ -143,7 +166,7 @@ export default async function UnitPage({ params }: { params: Promise<{ unitId: s
 
       <p className="mt-8 text-sm">
         <Link href="/course" className="text-primary underline-offset-2 hover:underline">
-          Back to the eight-unit map
+          Back to the honesty map
         </Link>
       </p>
     </article>

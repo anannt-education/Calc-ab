@@ -1,108 +1,86 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { AcademicMethod } from "@/components/AcademicMethod";
-import { RedirectIfOnboarded } from "@/components/RedirectIfOnboarded";
-import { SITE } from "@/lib/site-config";
+import { buttonVariants } from "@/components/ui/button";
+import { LESSON_1_ID, LESSON_2_ID } from "@/lib/gate";
+import { buildMetadata } from "@/lib/site";
+import { PUBLIC_DESCRIPTIONS } from "@/lib/seo";
+
+export const metadata: Metadata = buildMetadata({
+  title: "Calculus AB · two free lessons",
+  description: PUBLIC_DESCRIPTIONS.home,
+  path: "/",
+});
 
 export default function Home() {
   return (
-    <>
-      <RedirectIfOnboarded />
-      <main className="relative min-h-screen overflow-hidden bg-paper">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.4]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 30h60M30 0v60' fill='none' stroke='%231a3a5c' stroke-width='0.4' opacity='0.12'/%3E%3C/svg%3E")`,
-          }}
-        />
+    <div className="mx-auto max-w-3xl">
+      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+        Self-prep studio · May 2027 exams
+      </p>
+      <h1 className="mt-3 font-[family-name:var(--font-playfair)] text-4xl leading-tight tracking-tight text-ink sm:text-5xl">
+        Calculus AB, two honest lessons first.
+      </h1>
+      <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+        Nobody should have to guess what to study tonight. These guides walk you through one idea, a
+        short check, and what to do next — written by people who have sat with Dubai students. The
+        first two lessons are open. No account. No pitch.
+      </p>
+      <p className="mt-3 text-sm text-ink-muted">
+        We would rather you learn the limit than buy a package. A mentor in Burjuman is here if you
+        want one later.
+      </p>
 
-        <div className="relative mx-auto flex min-h-screen max-w-5xl flex-col px-6 py-10">
-          <header className="flex items-center justify-between gap-4">
-            <div className="font-[family-name:var(--font-playfair)] text-xl font-semibold tracking-tight text-ink">
-              {SITE.brand}
-            </div>
-            <div className="flex items-center gap-3 text-sm">
-              <Link href="/faculty" className="text-ink-muted hover:text-ink">
-                Faculty
-              </Link>
-              <Link href="/home" className="text-ink-muted hover:text-ink">
-                Continue
-              </Link>
-              <Link
-                href="/onboarding"
-                className="rounded-full bg-ink px-4 py-2 font-medium text-paper hover:bg-navy"
-              >
-                Begin
-              </Link>
-            </div>
-          </header>
+      <ol className="mt-10 space-y-4">
+        <li className="rounded-2xl border border-rule bg-paper-soft p-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Lesson 1 · public</p>
+          <h2 className="mt-1 font-[family-name:var(--font-playfair)] text-2xl text-ink">
+            Limit versus function value
+          </h2>
+          <p className="mt-2 text-sm text-ink-muted">
+            A limit describes nearby behaviour, not the filled point. Move the hole and keep the
+            nearby graph fixed — then say what actually changed.
+          </p>
+          <Link href={`/lesson/${LESSON_1_ID}`} className={`${buttonVariants()} mt-4 inline-flex bg-ink text-paper hover:bg-navy`}>
+            Start lesson 1 — free, no account
+          </Link>
+        </li>
+        <li className="rounded-2xl border border-rule bg-paper-soft p-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Lesson 2 · public</p>
+          <h2 className="mt-1 font-[family-name:var(--font-playfair)] text-2xl text-ink">
+            FTC and accumulation
+          </h2>
+          <p className="mt-2 text-sm text-ink-muted">
+            Accumulation is signed. Predict whether the running integral rises when the integrand is
+            negative, then check it.
+          </p>
+          <Link href={`/lesson/${LESSON_2_ID}`} className={`${buttonVariants({ variant: "outline" })} mt-4 inline-flex`}>
+            Open lesson 2
+          </Link>
+        </li>
+      </ol>
 
-          <section className="mt-16 grid flex-1 gap-12 lg:mt-24 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">
-                {SITE.course} · {SITE.examYear} exam
-              </p>
-              <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-5xl leading-[1.08] tracking-tight text-ink sm:text-6xl">
-                {SITE.tagline}
-              </h1>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
-                {SITE.description} Built for students who want a serious, structured path — not another
-                question dump.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/onboarding"
-                  className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-ink hover:bg-gold-soft"
-                >
-                  Start the diagnostic
-                </Link>
-                <Link
-                  href="/course"
-                  className="rounded-full border border-rule px-6 py-3 text-sm font-medium text-ink hover:bg-paper-soft"
-                >
-                  Browse the course
-                </Link>
-              </div>
-            </div>
+      <p className="mt-8 rounded-xl border border-rule bg-card p-4 text-sm text-ink-muted">
+        This is written for a student with a quiet hour in Dubai, Sharjah, Abu Dhabi, or anywhere. If
+        today is a bad brain day, stop after the worked example. Come back tomorrow. The path will
+        still be here.
+      </p>
 
-            <div className="rounded-3xl border border-rule bg-paper-soft p-6 shadow-[0_24px_80px_-48px_rgba(26,58,92,0.55)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">The method</p>
-              <ul className="mt-4 space-y-4 text-sm text-ink">
-                <li>
-                  <span className="font-semibold">Mastery before volume.</span> Skills stay locked until the
-                  diagnostic and spaced review say you’re ready.
-                </li>
-                <li>
-                  <span className="font-semibold">Exam-shaped practice.</span> MCQ, FRQ, and calculator
-                  policy are taught as they appear on the {SITE.examYear} paper.
-                </li>
-                <li>
-                  <span className="font-semibold">A tutor who remembers you.</span> Ask Anannt about a
-                  stuck skill — the thread stays attached to that lesson.
-                </li>
-              </ul>
-            </div>
-          </section>
+      <div className="mt-8 flex flex-wrap gap-3 text-sm">
+        <Link href="/exam/2027" className="text-navy underline-offset-2 hover:underline">
+          2027 exam guide
+        </Link>
+        <Link href="/course" className="text-navy underline-offset-2 hover:underline">
+          Honesty map (two lessons open)
+        </Link>
+        <Link href="/onboarding" className="text-navy underline-offset-2 hover:underline">
+          Start a short diagnostic
+        </Link>
+      </div>
 
-          <AcademicMethod />
-
-          <footer className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-rule pt-6 text-xs text-ink-muted">
-            <p>
-              {SITE.legalName} · Independent AP Calculus AB platform · Not affiliated with College Board
-            </p>
-            <div className="flex gap-4">
-              <Link href="/privacy" className="hover:text-ink">
-                Privacy
-              </Link>
-              <Link href="/faq" className="hover:text-ink">
-                FAQ
-              </Link>
-              <Link href="/about" className="hover:text-ink">
-                About
-              </Link>
-            </div>
-          </footer>
-        </div>
-      </main>
-    </>
+      <div className="mt-12">
+        <AcademicMethod />
+      </div>
+    </div>
   );
 }

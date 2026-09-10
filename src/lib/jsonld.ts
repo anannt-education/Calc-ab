@@ -1,4 +1,4 @@
-import { SITE_NAME, SITE_URL, TRUST_LINE, absoluteUrl } from "./site";
+import { SITE_NAME, SITE_URL, COLLEGE_BOARD_LINE, STUDIO_LINE, absoluteUrl, BASE_PATH } from "./site";
 import { FAQS } from "./faq-content";
 import { FACULTY } from "./faculty";
 
@@ -8,8 +8,16 @@ export function organizationJsonLd() {
     "@type": "EducationalOrganization",
     name: SITE_NAME,
     url: SITE_URL,
-    description: TRUST_LINE,
-    areaServed: ["IN", "AE"],
+    description: `${COLLEGE_BOARD_LINE} ${STUDIO_LINE}`,
+    email: "wecare@anannt.ae",
+    telephone: "+971585853551",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Office 105, Bank Street Building, Burjuman Metro Exit 2",
+      addressLocality: "Dubai",
+      addressCountry: "AE",
+    },
+    areaServed: ["AE", "IN"],
     knowsAbout: ["AP Calculus AB", "limits", "derivatives", "integrals", "Fundamental Theorem of Calculus"],
   };
 }
@@ -18,23 +26,29 @@ export function courseJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Course",
-    name: "Anannt AP Calculus AB",
+    name: "Calculus AB self-study studio",
     description:
-      "Independent, faculty-reviewed preparation for AP Calculus AB (2027 hybrid digital format). Understand the idea, apply it independently, explain your reasoning, and show that you can still do it later. Not affiliated with College Board. No score guarantees.",
-    url: SITE_URL,
+      "Independent, faculty-reviewed self-study for AP Calculus AB (May 2027). Two public lessons are open without an account. Not affiliated with College Board. Does not predict an official AP score.",
+    url: `${SITE_URL}${BASE_PATH}`,
     provider: {
       "@type": "EducationalOrganization",
       name: SITE_NAME,
       url: SITE_URL,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Office 105, Bank Street Building, Burjuman Metro Exit 2",
+        addressLocality: "Dubai",
+        addressCountry: "AE",
+      },
     },
     educationalLevel: "High School",
-    teaches: "AP Calculus AB — limits, differentiation, integration, differential equations, applications of integration",
+    teaches: "Calculus AB — limits, differentiation, integration",
     inLanguage: "en",
     hasCourseInstance: {
       "@type": "CourseInstance",
-      name: "Anannt AP Calculus AB — May 2027 preparation",
+      name: "Calculus AB — May 2027 self-prep",
       courseMode: "online",
-      location: SITE_URL,
+      location: `${SITE_URL}${BASE_PATH}`,
     },
   };
 }
@@ -43,9 +57,9 @@ export function programJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "EducationalOccupationalProgram",
-    name: "Anannt AP Calculus AB 2027 preparation",
+    name: "Calculus AB 2027 self-prep",
     description:
-      "Self-paced academic programme covering the AP Calculus AB framework with Anannt Concept Lens, Method Choice, Error Clinic, Reasoning Studio, and Exam Review. Not an accredited degree and not a College Board programme.",
+      "Self-paced studio covering Calculus AB ideas with Anannt Concept Lens, Method Choice, Error Clinic, and Exam Review. Not an accredited degree and not a College Board programme.",
     provider: { "@type": "EducationalOrganization", name: SITE_NAME, url: SITE_URL },
     educationalProgramMode: "online",
     timeOfDay: "flexible",
@@ -83,7 +97,7 @@ export function facultyJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Anannt AP Calculus AB faculty reviewers",
+    name: "Anannt Calculus AB faculty reviewers",
     itemListElement: FACULTY.map((p, i) => ({
       "@type": "ListItem",
       position: i + 1,
