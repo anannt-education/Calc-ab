@@ -1,16 +1,35 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL } from "@/lib/site";
+import { BASE_PATH } from "@/lib/gate";
+import { SITE_ORIGIN } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
-        disallow: ["/api/", "/mock/sit", "/cms", "/mentor"],
+        allow: [
+          BASE_PATH,
+          `${BASE_PATH}/lesson/u1-limit-vs-value`,
+          `${BASE_PATH}/lesson/u6-ftc`,
+          `${BASE_PATH}/exam/2027`,
+          `${BASE_PATH}/faq`,
+          `${BASE_PATH}/privacy`,
+        ],
+        disallow: [
+          `${BASE_PATH}/mock`,
+          `${BASE_PATH}/api`,
+          `${BASE_PATH}/practice`,
+          `${BASE_PATH}/frq`,
+          `${BASE_PATH}/cms`,
+          `${BASE_PATH}/mentor`,
+          `${BASE_PATH}/home`,
+          `${BASE_PATH}/progress`,
+          `${BASE_PATH}/mistakes`,
+          `${BASE_PATH}/ask`,
+        ],
       },
     ],
-    sitemap: `${SITE_URL}/sitemap.xml`,
-    host: SITE_URL,
+    sitemap: `${SITE_ORIGIN}${BASE_PATH}/sitemap.xml`,
+    host: SITE_ORIGIN,
   };
 }

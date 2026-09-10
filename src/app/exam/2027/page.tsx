@@ -4,21 +4,12 @@ import { ExamFormatTable } from "@/components/ExamFormatTable";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { COURSE } from "@/lib/exam-config";
-import { buildMetadata } from "@/lib/site";
+import { PUBLIC_META, buildMetadata } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "2027 AP Calculus AB exam guide",
-  description:
-    "Anannt’s explanation of the 2027 AP Calculus AB hybrid digital format: 42 MCQ, 6 FRQ, four parts, calculator rules. Links to official College Board pages.",
-  path: "/exam/2027",
-  keywords: [
-    "AP Calculus AB 2027",
-    "hybrid digital AP Calculus",
-    "42 MCQ",
-    "FRQ practice",
-    "Anannt Education",
-    "calculator policy",
-  ],
+  title: PUBLIC_META.exam.title,
+  description: PUBLIC_META.exam.description,
+  path: PUBLIC_META.exam.path,
 });
 
 export default function Exam2027Page() {
@@ -65,10 +56,10 @@ export default function Exam2027Page() {
         <h2 className="text-lg font-semibold text-primary">Calculator rules we train</h2>
         <p className="mt-2 text-sm">
           Parts I B and II A require a calculator. Parts I A and II B do not permit one. College
-          Board’s current policy provides built-in Desmos in Bluebook for calculator-required Calculus
-          parts and also permits approved handheld graphing calculators. Anannt classroom graphs are
-          teaching tools; they are not replicas of the exam calculator. Train the route you will
-          actually use on the day.
+          Board’s current policy provides a built-in digital graphing calculator for calculator-required
+          Calculus parts and also permits approved handheld graphing calculators. Graphs in this
+          studio are teaching tools; they are not replicas of the exam calculator. Train the route you
+          will actually use on the day.
         </p>
       </section>
 

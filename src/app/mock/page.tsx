@@ -6,6 +6,7 @@ import { useStudent } from "@/components/StudentProvider";
 import { EXAM_BLUEPRINT, EXAM_PARTS, SHORT_DRILL_COUNTS } from "@/lib/exam-config";
 import { buttonVariants } from "@/components/ui/button";
 import { nowISO } from "@/lib/storage";
+import { appPath } from "@/lib/gate";
 import type { MockSitting } from "@/lib/types";
 
 export default function MockCentrePage() {
@@ -30,7 +31,7 @@ export default function MockCentrePage() {
       mockSittings: [sitting, ...s.mockSittings],
       currentContext: { ...s.currentContext, mockSittingId: sitting.id, assessmentMode: "mock" },
     }));
-    window.location.href = `/mock/sit/${sitting.id}`;
+    window.location.href = appPath(`/mock/sit/${sitting.id}`);
   }
 
   return (

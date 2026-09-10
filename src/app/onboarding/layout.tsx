@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/site";
+import { buildMetadata, PUBLIC_META } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Onboarding diagnostic",
-  description:
-    "Anannt prerequisite diagnostic for AP Calculus AB 2027. “I have not learned this yet” is a placement fact, not a mistake.",
-  path: "/onboarding",
+  title: PUBLIC_META.onboarding.title,
+  description: PUBLIC_META.onboarding.description,
+  path: PUBLIC_META.onboarding.path,
 });
 
 export default function OnboardingLayout({ children }: { children: React.ReactNode }) {

@@ -1,7 +1,7 @@
 "use client";
 
-import { Suspense, useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +11,7 @@ import { PracticeItem } from "@/components/PracticeItem";
 import { useStudent } from "@/components/StudentProvider";
 import { DIAGNOSTIC_ITEM_IDS, ITEM_BY_ID } from "@/lib/content";
 import { SKILL_BY_ID } from "@/lib/content/skills";
+import { goToGate } from "@/lib/gate";
 import { defaultProfile, SCHOOL_TOPICS } from "@/lib/storage";
 import type { OnboardingProfile } from "@/lib/types";
 
@@ -26,7 +27,6 @@ function OnboardingInner() {
   const params = useSearchParams();
   const startDiag = params.get("step") === "diagnostic";
   const { state, setState, recordAttempt, log } = useStudent();
-  const router = useRouter();
   const [step, setStep] = useState<"profile" | "diagnostic">(startDiag ? "diagnostic" : "profile");
   const [form, setStateForm] = useState<OnboardingProfile>(
     state.profile ?? defaultProfile({ skippedOptional: false })
@@ -36,6 +36,10 @@ function OnboardingInner() {
 
   const items = useMemo(() => DIAGNOSTIC_ITEM_IDS.map((id) => ITEM_BY_ID[id]).filter(Boolean), []);
   const current = items[qIndex];
+
+  useEffect(() => {
+    if (startDiag) log("diagnostic_start", { via: "query" });
+  }, [startDiag, log]);
 
   function saveProfile(next = form) {
     setState((s) => ({ ...s, profile: next }));
@@ -47,7 +51,7 @@ function OnboardingInner() {
       profile: { ...(s.profile ?? form), diagnosticCompleted: true },
     }));
     log("diagnostic_completed", { items: items.length });
-    router.push("/home");
+    goToGate("diagnostic");
   }
 
   if (step === "diagnostic" && current) {
@@ -119,6 +123,7 @@ function OnboardingInner() {
         onSubmit={(e) => {
           e.preventDefault();
           saveProfile({ ...form, skippedOptional: skipOptional });
+          log("diagnostic_start", { skippedOptional: skipOptional });
           setStep("diagnostic");
         }}
         action="#"
@@ -183,7 +188,7 @@ function OnboardingInner() {
             }
           >
             <label className="flex items-center gap-2 text-sm">
-              <RadioGroupItem value="desmos-bluebook" /> Built-in Desmos in Bluebook (official route)
+              <RadioGroupItem value="desmos-bluebook" /> Built-in digital graphing calculator on exam day
             </label>
             <label className="flex items-center gap-2 text-sm">
               <RadioGroupItem value="handheld" /> Approved handheld graphing calculator
@@ -209,14 +214,7 @@ function OnboardingInner() {
           </label>
           {!skipOptional && (
             <div className="mt-3 space-y-3">
-              <Field label="Optional target score (not a promise)">
-                <Input
-                  placeholder="e.g. 4 — this is a hope, not a guaranteed outcome"
-                  value={form.targetScore ?? ""}
-                  onChange={(e) => setStateForm({ ...form, targetScore: e.target.value })}
-                />
-              </Field>
-              <Field label="School examination date (if any) — not the AP date">
+              <Field label="Optional school examination date (if any) — not the AP date">
                 <Input
                   type="date"
                   value={form.schoolExamDate ?? ""}
@@ -242,6 +240,7 @@ function OnboardingInner() {
             type="button"
             onClick={() => {
               saveProfile({ ...form, skippedOptional: skipOptional });
+              log("diagnostic_start", { skippedOptional: skipOptional });
               setStep("diagnostic");
             }}
           >
@@ -252,6 +251,7 @@ function OnboardingInner() {
             variant="outline"
             onClick={() => {
               saveProfile({ ...form, skippedOptional: true });
+              log("diagnostic_start", { skippedOptional: true });
               setStep("diagnostic");
             }}
           >

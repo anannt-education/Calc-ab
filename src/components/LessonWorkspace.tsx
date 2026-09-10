@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { PracticeItem } from "@/components/PracticeItem";
+import { PublicLessonContinue } from "@/components/PublicLessonContinue";
 import { useStudent } from "@/components/StudentProvider";
 import { buttonVariants } from "@/components/ui/button";
 import { ITEM_BY_ID, LESSON_BY_ID, SKILL_BY_ID } from "@/lib/content";
@@ -190,6 +191,8 @@ export function LessonWorkspace({ id }: { id: string }) {
         If a stem, graph, or key looks ambiguous, use <strong>Report ambiguous mathematics</strong> on
         the item. Faculty keep a correction trail; we do not silently rewrite your past attempts.
       </p>
+
+      <PublicLessonContinue id={id} />
     </div>
   );
 }

@@ -3,13 +3,12 @@ import type { Metadata } from "next";
 import { AcademicMethod } from "@/components/AcademicMethod";
 import { JsonLd } from "@/components/JsonLd";
 import { programJsonLd } from "@/lib/jsonld";
-import { buildMetadata } from "@/lib/site";
+import { PUBLIC_META, buildMetadata } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Academic approach",
-  description:
-    "How Anannt Education teaches AP Calculus AB: Concept Lens, Method Choice, Error Clinic, Reasoning Studio, and Exam Review. CED-aligned, AB scope protected.",
-  path: "/about",
+  title: PUBLIC_META.about.title,
+  description: PUBLIC_META.about.description,
+  path: PUBLIC_META.about.path,
 });
 
 export default function AboutPage() {

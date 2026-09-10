@@ -16,9 +16,11 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useStudent } from "./StudentProvider";
-import { TRUST_LINE } from "@/lib/site";
+import { useStudySession } from "@/components/useStudySession";
+import { FOOTER_NAP, FOOTER_STUDIO, FOOTER_TRADEMARK } from "@/lib/site";
+import { LESSON_1_ID, LESSON_2_ID, SITE_ORIGIN } from "@/lib/gate";
 
-const NAV = [
+const SESSION_NAV = [
   { href: "/home", label: "Home", icon: Home },
   { href: "/course", label: "Course", icon: BookOpen },
   { href: "/practice", label: "Practice", icon: ClipboardList },
@@ -29,23 +31,31 @@ const NAV = [
   { href: "/ask", label: "Ask Anannt", icon: MessageCircle },
 ];
 
+const PUBLIC_NAV = [
+  { href: "/", label: "Start", icon: Home },
+  { href: `/lesson/${LESSON_1_ID}`, label: "Lesson 1", icon: BookOpen },
+  { href: `/lesson/${LESSON_2_ID}`, label: "Lesson 2", icon: BookOpen },
+  { href: "/exam/2027", label: "Exam guide", icon: ClipboardList },
+  { href: "/faq", label: "FAQ", icon: NotebookPen },
+];
+
 const PUBLIC_FOOTER = [
-  { href: "/", label: "Home" },
-  { href: "/course", label: "Course map" },
-  { href: "/lesson/u1-limit-vs-value", label: "Sample: limits" },
-  { href: "/lesson/u6-ftc", label: "Sample: FTC" },
+  { href: "/", label: "Start" },
+  { href: `/lesson/${LESSON_1_ID}`, label: "Limit vs function value" },
+  { href: `/lesson/${LESSON_2_ID}`, label: "FTC accumulation" },
   { href: "/exam/2027", label: "2027 exam guide" },
-  { href: "/about", label: "Academic approach" },
-  { href: "/faculty", label: "Faculty" },
   { href: "/faq", label: "FAQ" },
   { href: "/privacy", label: "Privacy" },
+  { href: "/about", label: "How we teach" },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
   const { state, setState } = useStudent();
+  const gated = useStudySession();
   const hideNav = path.startsWith("/mock/sit") || path.startsWith("/onboarding");
-  const homeHref = state.profile?.diagnosticCompleted ? "/home" : "/";
+  const nav = gated ? SESSION_NAV : PUBLIC_NAV;
+  const homeHref = gated && state.profile?.diagnosticCompleted ? "/home" : "/";
 
   useEffect(() => {
     if (path.startsWith("/mock/sit")) return;
@@ -72,26 +82,26 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </span>
             <span>
               <span className="block text-sm font-semibold tracking-tight">Anannt Education</span>
-              <span className="block text-xs text-muted-foreground">AP Calculus AB · 2027</span>
+              <span className="block text-xs text-muted-foreground">Study · Calculus AB · 2027</span>
             </span>
           </Link>
           {!hideNav && (
             <p className="hidden text-xs text-muted-foreground sm:block">
-              Independent prep · not a College Board score
+              Self-prep studio · not a College Board score
             </p>
           )}
-          <Link
-            href="/faculty"
+          <a
+            href={SITE_ORIGIN}
             className="text-xs text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
           >
-            Faculty
-          </Link>
+            Study
+          </a>
         </div>
         {!hideNav && (
           <nav aria-label="Student" className="mx-auto max-w-6xl overflow-x-auto px-2 pb-2">
             <ul className="flex min-w-max gap-1">
-              {NAV.map((n) => {
-                const active = path === n.href || (n.href !== "/home" && path.startsWith(n.href + "/"));
+              {nav.map((n) => {
+                const active = path === n.href || (n.href !== "/" && path.startsWith(n.href + "/"));
                 const Icon = n.icon;
                 return (
                   <li key={n.href}>
@@ -119,8 +129,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {children}
       </main>
       <footer className="border-t px-4 py-6 text-xs text-muted-foreground">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-center font-medium text-foreground/80">{TRUST_LINE}</p>
+        <div className="mx-auto max-w-6xl space-y-3">
+          <p className="text-center">{FOOTER_TRADEMARK}</p>
+          <p className="text-center">{FOOTER_STUDIO}</p>
+          <p className="text-center font-medium text-foreground/80">{FOOTER_NAP}</p>
           <nav aria-label="Footer" className="mt-3">
             <ul className="flex flex-wrap justify-center gap-x-3 gap-y-1">
               {PUBLIC_FOOTER.map((l) => (
@@ -132,16 +144,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               ))}
             </ul>
           </nav>
-          <p className="mt-3 text-center">
-            Practice composites are internal percentages, not AP score predictions.{" "}
-            <Link href="/cms" className="underline-offset-2 hover:underline">
-              Academic CMS
-            </Link>
-            <span className="mx-2">·</span>
-            <Link href="/mentor" className="underline-offset-2 hover:underline">
-              Mentor queue
-            </Link>
-          </p>
         </div>
       </footer>
     </div>

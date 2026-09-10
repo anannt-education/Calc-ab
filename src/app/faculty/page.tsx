@@ -3,13 +3,12 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { FACULTY, REVIEW_STANDARDS } from "@/lib/faculty";
 import { facultyJsonLd } from "@/lib/jsonld";
-import { buildMetadata } from "@/lib/site";
+import { PUBLIC_META, buildMetadata } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Faculty and review standards",
-  description:
-    "Anannt AP Calculus AB faculty reviewers, qualifications, and the two-person approval rule. No College Board affiliation.",
-  path: "/faculty",
+  title: PUBLIC_META.faculty.title,
+  description: PUBLIC_META.faculty.description,
+  path: PUBLIC_META.faculty.path,
 });
 
 export default function FacultyPage() {
