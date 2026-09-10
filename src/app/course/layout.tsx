@@ -3,7 +3,7 @@ import { buildMetadata } from "@/lib/site";
 import { PUBLIC_DESCRIPTIONS } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Calculus AB map · two lessons open",
+  title: "Calculus AB map · two public lessons",
   description: PUBLIC_DESCRIPTIONS.course,
   path: "/course",
 });

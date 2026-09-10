@@ -3,8 +3,9 @@ import type { NextRequest } from "next/server";
 import { SESSION_COOKIE, isPublicPath, studyStartUrl, unitFromPath } from "@/lib/gate";
 
 /**
- * After the two public lessons, remaining units, mocks, FRQ, and practice
- * require the study session cookie. Unauthenticated hits go to study /start.
+ * After the two public lessons, remaining units (including gated lessons 3–4),
+ * mocks, FRQ, and practice require the study session cookie.
+ * Unauthenticated hits 307 to study /start?subject=calculus-ab with unit when known.
  */
 export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -18,7 +19,7 @@ export function proxy(request: NextRequest) {
   }
 
   const unit = unitFromPath(pathname);
-  return NextResponse.redirect(studyStartUrl({ unit }));
+  return NextResponse.redirect(studyStartUrl({ unit }), 307);
 }
 
 export const config = {

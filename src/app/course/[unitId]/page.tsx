@@ -8,7 +8,7 @@ import { LESSON_BY_ID, SKILL_BY_ID, UNITS, UNIT_BY_ID } from "@/lib/content";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { buildMetadata, plainText } from "@/lib/site";
 import { PUBLIC_DESCRIPTIONS } from "@/lib/seo";
-import { isPublicLessonId } from "@/lib/gate";
+import { isGatedLessonId, isPublicLessonId } from "@/lib/gate";
 
 export function generateStaticParams() {
   return UNITS.map((u) => ({ unitId: u.id }));
@@ -106,7 +106,7 @@ export default async function UnitPage({ params }: { params: Promise<{ unitId: s
             return (
               <li key={id} className="rounded-xl border bg-card p-4">
                 <h3 className="font-medium">
-                  {isPublicLessonId(id) ? (
+                  {isPublicLessonId(id) || isGatedLessonId(id) ? (
                     <Link href={`/lesson/${id}`} className="text-primary underline-offset-2 hover:underline">
                       {lesson.title}
                     </Link>
@@ -114,8 +114,10 @@ export default async function UnitPage({ params }: { params: Promise<{ unitId: s
                     <span>{lesson.title}</span>
                   )}
                 </h3>
-                {!isPublicLessonId(id) && (
-                  <p className="mt-1 text-xs text-muted-foreground">Opens after the two public lessons and the study gate.</p>
+                {isPublicLessonId(id) ? null : isGatedLessonId(id) ? (
+                  <p className="mt-1 text-xs text-muted-foreground">Gated. Session cookie required. Not a third public lesson.</p>
+                ) : (
+                  <p className="mt-1 text-xs text-muted-foreground">Faculty draft. Not a published unit journey.</p>
                 )}
                 <p className="mt-1 text-sm">
                   <MathHtml text={lesson.objective} />
