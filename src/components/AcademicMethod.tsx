@@ -17,9 +17,9 @@ const METHODS = [
     body: "The mix-up we see most often, named kindly, with what to try next. Not a lecture about effort.",
   },
   {
-    href: "/frq",
+    href: "/about#method-choice",
     name: "Reasoning Studio",
-    body: "Handwritten arguments against a point-level rubric. Self-review is labelled; faculty review is separate.",
+    body: "Handwritten arguments against a point-level rubric. Self-review is labelled; faculty review is separate. The studio itself sits behind the study gate.",
   },
   {
     href: "/exam/2027",

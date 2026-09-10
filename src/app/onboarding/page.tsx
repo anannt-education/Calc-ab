@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,6 +13,7 @@ import { DIAGNOSTIC_ITEM_IDS, ITEM_BY_ID } from "@/lib/content";
 import { SKILL_BY_ID } from "@/lib/content/skills";
 import { defaultProfile, SCHOOL_TOPICS } from "@/lib/storage";
 import type { OnboardingProfile } from "@/lib/types";
+import { studyStartUrl } from "@/lib/gate";
 
 export default function OnboardingPage() {
   return (
@@ -26,7 +27,6 @@ function OnboardingInner() {
   const params = useSearchParams();
   const startDiag = params.get("step") === "diagnostic";
   const { state, setState, recordAttempt, log } = useStudent();
-  const router = useRouter();
   const [step, setStep] = useState<"profile" | "diagnostic">(startDiag ? "diagnostic" : "profile");
   const [form, setStateForm] = useState<OnboardingProfile>(
     state.profile ?? defaultProfile({ skippedOptional: false })
@@ -47,7 +47,7 @@ function OnboardingInner() {
       profile: { ...(s.profile ?? form), diagnosticCompleted: true },
     }));
     log("diagnostic_completed", { items: items.length });
-    router.push("/home");
+    window.location.assign(studyStartUrl());
   }
 
   if (step === "diagnostic" && current) {
@@ -119,6 +119,7 @@ function OnboardingInner() {
         onSubmit={(e) => {
           e.preventDefault();
           saveProfile({ ...form, skippedOptional: skipOptional });
+          log("diagnostic_start", {});
           setStep("diagnostic");
         }}
         action="#"
@@ -183,7 +184,7 @@ function OnboardingInner() {
             }
           >
             <label className="flex items-center gap-2 text-sm">
-              <RadioGroupItem value="desmos-bluebook" /> Built-in Desmos in Bluebook (official route)
+              <RadioGroupItem value="desmos-bluebook" /> Built-in Desmos on the digital exam
             </label>
             <label className="flex items-center gap-2 text-sm">
               <RadioGroupItem value="handheld" /> Approved handheld graphing calculator
@@ -209,13 +210,13 @@ function OnboardingInner() {
           </label>
           {!skipOptional && (
             <div className="mt-3 space-y-3">
-              <Field label="Optional target score (not a promise)">
-                <Input
-                  placeholder="e.g. 4 — this is a hope, not a guaranteed outcome"
-                  value={form.targetScore ?? ""}
-                  onChange={(e) => setStateForm({ ...form, targetScore: e.target.value })}
-                />
-              </Field>
+                  <Field label="Optional planning note (not a score)">
+                    <Input
+                      placeholder="e.g. I want more FRQ practice — this is a hope, not a prediction"
+                      value={form.targetScore ?? ""}
+                      onChange={(e) => setStateForm({ ...form, targetScore: e.target.value })}
+                    />
+                  </Field>
               <Field label="School examination date (if any) — not the AP date">
                 <Input
                   type="date"
@@ -242,6 +243,7 @@ function OnboardingInner() {
             type="button"
             onClick={() => {
               saveProfile({ ...form, skippedOptional: skipOptional });
+              log("diagnostic_start", {});
               setStep("diagnostic");
             }}
           >
@@ -252,6 +254,7 @@ function OnboardingInner() {
             variant="outline"
             onClick={() => {
               saveProfile({ ...form, skippedOptional: true });
+              log("diagnostic_start", {});
               setStep("diagnostic");
             }}
           >

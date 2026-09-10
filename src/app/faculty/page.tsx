@@ -3,12 +3,11 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { FACULTY, REVIEW_STANDARDS } from "@/lib/faculty";
 import { facultyJsonLd } from "@/lib/jsonld";
-import { buildMetadata } from "@/lib/site";
+import { buildMetadata, PUBLIC_DESCRIPTIONS } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
   title: "Faculty and review standards",
-  description:
-    "Anannt AP Calculus AB faculty reviewers, qualifications, and the two-person approval rule. No College Board affiliation.",
+  description: PUBLIC_DESCRIPTIONS.faculty,
   path: "/faculty",
 });
 
@@ -54,22 +53,17 @@ export default function FacultyPage() {
       <section className="mt-8 text-sm">
         <h2 className="text-lg font-semibold text-primary">See the workflow</h2>
         <p className="mt-2">
-          The academic CMS preview shows coverage against required AB skills and blocks
-          self-publish. A demo mentor queue holds one faculty-reviewed handwritten FRQ with page
-          mapping. These are product controls, not a claim that every item in a future full bank has
-          already been through a paid marking cycle.
+          Coverage against required AB skills is an internal faculty control. A demo mentor queue
+          holds handwritten FRQ work behind the study gate. These are product controls, not a claim
+          that every later unit is already published.
         </p>
         <p className="mt-3">
-          <Link href="/cms" className="text-primary underline-offset-2 hover:underline">
-            Academic CMS
-          </Link>
-          <span className="mx-2">·</span>
-          <Link href="/mentor" className="text-primary underline-offset-2 hover:underline">
-            Mentor review queue
-          </Link>
-          <span className="mx-2">·</span>
           <Link href="/lesson/u1-limit-vs-value" className="text-primary underline-offset-2 hover:underline">
-            Sample lesson with faculty chrome
+            Public lesson: limit vs function value
+          </Link>
+          <span className="mx-2">·</span>
+          <Link href="/lesson/u6-ftc" className="text-primary underline-offset-2 hover:underline">
+            Public lesson: FTC accumulation
           </Link>
         </p>
       </section>

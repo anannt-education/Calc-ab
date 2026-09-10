@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Anannt Education — independent AP Calculus AB preparation for 2027";
+export const alt = "Anannt Study — Calculus AB, two open lessons for May 2027";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -15,8 +15,8 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: 80,
-          background: "#1B3A5F",
-          color: "#F7F4EC",
+          background: "#0F245C",
+          color: "#F4EFE4",
         }}
       >
         <div
@@ -24,37 +24,29 @@ export default function OpenGraphImage() {
             display: "flex",
             alignItems: "center",
             gap: 16,
-            color: "#C4A35A",
-            fontSize: 28,
+            color: "#E4A31A",
+            fontSize: 22,
             letterSpacing: 1,
           }}
         >
-          <div
-            style={{
-              width: 48,
-              height: 48,
-              borderRadius: 8,
-              background: "#C4A35A",
-              color: "#1B3A5F",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 32,
-              fontFamily: "Georgia, serif",
-            }}
-          >
-            ∫
-          </div>
-          Anannt Education
+          Anannt Study
         </div>
-        <div style={{ fontSize: 64, fontWeight: 700, marginTop: 24, lineHeight: 1.1 }}>
-          AP Calculus AB
+        <div
+          style={{
+            marginTop: 12,
+            height: 1,
+            width: 120,
+            background: "#E4A31A",
+          }}
+        />
+        <div style={{ fontSize: 58, fontWeight: 700, marginTop: 24, lineHeight: 1.1 }}>
+          Calculus AB
         </div>
-        <div style={{ fontSize: 28, marginTop: 16, maxWidth: 900, lineHeight: 1.35, color: "#E8E0C8" }}>
-          Independent preparation for the 2027 hybrid digital exam — limits, FTC, FRQ reasoning.
+        <div style={{ fontSize: 26, marginTop: 16, maxWidth: 900, lineHeight: 1.35, color: "#F4EFE4" }}>
+          Two open lessons: limit vs function value, then FTC accumulation. No account.
         </div>
-        <div style={{ fontSize: 18, marginTop: 36, color: "#C4A35A" }}>
-          Not affiliated with College Board · No score predictions
+        <div style={{ fontSize: 18, marginTop: 36, color: "#E4A31A" }}>
+          Independent self-prep · not affiliated with College Board
         </div>
       </div>
     ),

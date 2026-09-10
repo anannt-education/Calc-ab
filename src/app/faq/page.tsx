@@ -3,12 +3,11 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { FAQS } from "@/lib/faq-content";
 import { faqJsonLd } from "@/lib/jsonld";
-import { buildMetadata } from "@/lib/site";
+import { buildMetadata, PUBLIC_DESCRIPTIONS } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
   title: "FAQ",
-  description:
-    "Honest FAQ for Anannt AP Calculus AB: no score guarantees, self-administered mocks, mastery versus watching a lesson, 2027 format.",
+  description: PUBLIC_DESCRIPTIONS.faq,
   path: "/faq",
 });
 

@@ -10,7 +10,8 @@ import { MathHtml } from "@/components/MathHtml";
 import { LESSON_BY_ID, LESSONS, SKILL_BY_ID, UNIT_BY_ID } from "@/lib/content";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { facultyById } from "@/lib/faculty";
-import { buildMetadata, plainText } from "@/lib/site";
+import { isPublicLessonId, PUBLIC_LESSON_META, studyStartUrl } from "@/lib/gate";
+import { buildMetadata, plainText, PUBLIC_DESCRIPTIONS } from "@/lib/site";
 
 const SHORT_TITLE: Record<string, string> = {
   "u1-limit-vs-value": "Limit versus function value",
@@ -45,22 +46,36 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const lesson = LESSON_BY_ID[id];
-  if (!lesson) return buildMetadata({ title: "Lesson", description: "Lesson not in this course slice.", path: `/lesson/${id}` });
+  if (!lesson) {
+    return buildMetadata({
+      title: "Lesson",
+      description: "This Calculus AB lesson is not in the public slice.",
+      path: `/lesson/${id}`,
+      noIndex: true,
+    });
+  }
+  if (id === "u1-limit-vs-value") {
+    return buildMetadata({
+      title: "Limit versus function value",
+      description: PUBLIC_DESCRIPTIONS.lesson1,
+      path: `/lesson/${id}`,
+      type: "article",
+    });
+  }
+  if (id === "u6-ftc") {
+    return buildMetadata({
+      title: "FTC and accumulation",
+      description: PUBLIC_DESCRIPTIONS.lesson2,
+      path: `/lesson/${id}`,
+      type: "article",
+    });
+  }
   return buildMetadata({
     title: SHORT_TITLE[lesson.id] ?? lesson.title,
-    description: plainText(
-      `${lesson.title}. ${lesson.objective} Anannt AP Calculus AB — independent 2027 prep.`
-    ),
+    description: plainText(`${lesson.title}. ${lesson.objective}`),
     path: `/lesson/${id}`,
     type: "article",
-    keywords: [
-      "AP Calculus AB 2027",
-      lesson.title,
-      "Anannt Education",
-      "limits",
-      "FTC",
-      "FRQ practice",
-    ],
+    noIndex: true,
   });
 }
 
@@ -174,33 +189,47 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
       <LessonWorkspace id={id} />
 
       <nav aria-label="Related lessons" className="mt-10 border-t pt-6">
-        <h2 className="text-base font-semibold text-primary">Related in this unit</h2>
+        <h2 className="text-base font-semibold text-primary">What is open next</h2>
         <ul className="mt-2 space-y-1 text-sm">
-          {related.map((l) => (
-            <li key={l.id}>
-              <Link href={`/lesson/${l.id}`} className="text-primary underline-offset-2 hover:underline">
-                {l.title}
-              </Link>
-            </li>
-          ))}
-          <li>
-            <Link href={`/course/${lesson.unitId}`} className="text-primary underline-offset-2 hover:underline">
-              Full {unit?.title ?? "unit"} map
-            </Link>
-          </li>
-          {lesson.prerequisites.map((s) => {
-            const skill = SKILL_BY_ID[s];
-            const href = skill?.remediationLessonId ? `/lesson/${skill.remediationLessonId}` : "/course";
-            return (
-              <li key={s}>
-                Prerequisite:{" "}
-                <Link href={href} className="text-primary underline-offset-2 hover:underline">
-                  {skill?.title ?? s}
+          {isPublicLessonId(id) ? (
+            <>
+              {id === "u1-limit-vs-value" && (
+                <li>
+                  <Link
+                    href={PUBLIC_LESSON_META["u6-ftc"].href}
+                    className="text-primary underline-offset-2 hover:underline"
+                  >
+                    Lesson 2: FTC accumulation
+                  </Link>
+                </li>
+              )}
+              {id === "u6-ftc" && (
+                <li>
+                  <a href={studyStartUrl({ unit: "u6" })} className="text-primary underline-offset-2 hover:underline">
+                    Finish the two open lessons — study gate
+                  </a>
+                </li>
+              )}
+              <li>
+                <Link href="/" className="text-primary underline-offset-2 hover:underline">
+                  Calculus AB home
                 </Link>
               </li>
-            );
-          })}
+            </>
+          ) : (
+            related.filter((l) => isPublicLessonId(l.id)).map((l) => (
+              <li key={l.id}>
+                <Link href={`/lesson/${l.id}`} className="text-primary underline-offset-2 hover:underline">
+                  {l.title}
+                </Link>
+              </li>
+            ))
+          )}
         </ul>
+        <p className="mt-3 text-xs text-muted-foreground">
+          Later lessons in this unit are unpublished until faculty signs them. They go to a waitlist,
+          not a missing page.
+        </p>
       </nav>
     </article>
   );

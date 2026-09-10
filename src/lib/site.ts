@@ -1,21 +1,24 @@
 import type { Metadata } from "next";
+import { BASE_PATH, STUDY_ORIGIN } from "./gate";
 
-/** Canonical site origin used by metadataBase, sitemap, and JSON-LD. */
-export const SITE_URL = "https://apcalc.anannt.education";
+/** Canonical origin for metadataBase, Open Graph, and JSON-LD. Path prefix is BASE_PATH. */
+export const SITE_ORIGIN = STUDY_ORIGIN;
+export const SITE_URL = `${STUDY_ORIGIN}${BASE_PATH}`;
 export const SITE_NAME = "Anannt Education";
-export const COURSE_NAME = "Anannt AP Calculus AB";
-export const TITLE_SUFFIX = "Anannt AP Calculus AB";
+export const COURSE_NAME = "Calculus AB · Anannt Study";
+export const TITLE_SUFFIX = "Anannt Study";
 
 export const TRUST_LINE =
-  "Anannt Education — independent AP Calculus AB preparation. Not affiliated with or endorsed by College Board.";
+  "Anannt Education — independent Calculus AB preparation. Not affiliated with or endorsed by College Board.";
 
 export function absoluteUrl(path: string) {
   const p = path.startsWith("/") ? path : `/${path}`;
+  if (p === "/") return SITE_URL;
   return `${SITE_URL}${p}`;
 }
 
 /** Strip TeX delimiters so meta descriptions stay readable. */
-export function plainText(input: string, max = 155) {
+export function plainText(input: string, max = 160) {
   const cleaned = input
     .replace(/\$\$([\s\S]+?)\$\$/g, " $1 ")
     .replace(/\$([^$]+)\$/g, " $1 ")
@@ -53,12 +56,11 @@ export function buildMetadata({
   const url = absoluteUrl(path);
   const fullTitle = pageTitle(title);
   const kw = keywords ?? [
-    "AP Calculus AB 2027",
+    "Calculus AB 2027",
     "Anannt Education",
     "limits",
     "Fundamental Theorem of Calculus",
-    "FRQ practice",
-    "AP Calculus diagnostic",
+    "Anannt Study",
   ];
   return {
     title: { absolute: fullTitle },
@@ -81,3 +83,22 @@ export function buildMetadata({
     },
   };
 }
+
+/** Unique 150–160 character descriptions for public URLs. */
+export const PUBLIC_DESCRIPTIONS = {
+  home: "Two open Calculus AB lessons for May 2027: why a limit is not a function value, then FTC accumulation. No account. A Burjuman desk if you get stuck later.",
+  lesson1:
+    "Why a limit is not the filled-in function value. Public Calculus AB lesson one with a graph lab and an independent check. No account is required today.",
+  lesson2:
+    "Signed accumulation and the Fundamental Theorem: why area and a running integral differ. Public Calculus AB lesson two, open with no account required.",
+  exam: "May 2027 AP Calculus AB sitting in planning language: 42 multiple-choice, six free-response, four parts, and calculator rules. Not a score predictor here.",
+  faq: "Honest Calculus AB answers from Anannt Study: two open lessons, no score predictions, the May 2027 format, and when a Burjuman mentor is actually useful.",
+  privacy:
+    "How this Calculus AB studio stores progress in your browser, keeps marking keys on the server, and sends you to the study gate for a parent WhatsApp note.",
+  about:
+    "How Anannt teaches Calculus AB: one idea, a short check, and what to do next. Two lessons are public. The rest of the unit map is still being written.",
+  faculty:
+    "Named Anannt reviewers for Calculus AB lessons and a two-person approval rule. Independent of College Board, with no claim of official exam affiliation.",
+  onboarding:
+    "A short Calculus AB placement check for May 2027. Mark what you have not learned yet. No account. After you submit, we send you to the study desk gate.",
+} as const;
