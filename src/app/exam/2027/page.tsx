@@ -4,21 +4,12 @@ import { ExamFormatTable } from "@/components/ExamFormatTable";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { COURSE } from "@/lib/exam-config";
-import { buildMetadata } from "@/lib/site";
+import { buildMetadata, PUBLIC_DESCRIPTIONS } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "2027 AP Calculus AB exam guide",
-  description:
-    "Anannt’s explanation of the 2027 AP Calculus AB hybrid digital format: 42 MCQ, 6 FRQ, four parts, calculator rules. Links to official College Board pages.",
+  title: "2027 Calculus AB exam guide",
+  description: PUBLIC_DESCRIPTIONS.exam,
   path: "/exam/2027",
-  keywords: [
-    "AP Calculus AB 2027",
-    "hybrid digital AP Calculus",
-    "42 MCQ",
-    "FRQ practice",
-    "Anannt Education",
-    "calculator policy",
-  ],
 });
 
 export default function Exam2027Page() {
@@ -34,7 +25,7 @@ export default function Exam2027Page() {
         Anannt Exam Review · commentary
       </p>
       <h1 className="mt-1 font-sans text-2xl font-semibold tracking-tight text-primary sm:text-3xl">
-        2027 AP Calculus AB exam guide
+        2027 Calculus AB exam guide
       </h1>
       <p className="mt-3 text-base leading-relaxed">
         This page is Anannt faculty commentary on the May 2027 AP Calculus AB administration, written so
@@ -65,10 +56,10 @@ export default function Exam2027Page() {
         <h2 className="text-lg font-semibold text-primary">Calculator rules we train</h2>
         <p className="mt-2 text-sm">
           Parts I B and II A require a calculator. Parts I A and II B do not permit one. College
-          Board’s current policy provides built-in Desmos in Bluebook for calculator-required Calculus
-          parts and also permits approved handheld graphing calculators. Anannt classroom graphs are
-          teaching tools; they are not replicas of the exam calculator. Train the route you will
-          actually use on the day.
+          Board’s current policy provides built-in Desmos for calculator-required Calculus parts and
+          also permits approved handheld graphing calculators. Anannt classroom graphs are teaching
+          tools; they are not replicas of the exam calculator. Train the route you will actually use
+          on the day.
         </p>
       </section>
 
@@ -108,16 +99,16 @@ export default function Exam2027Page() {
       </section>
 
       <p className="mt-8 text-sm">
-        <Link href="/mock" className="text-primary underline-offset-2 hover:underline">
-          Open the mock centre
+        <Link href="/lesson/u1-limit-vs-value" className="text-primary underline-offset-2 hover:underline">
+          Open lesson 1
         </Link>
         <span className="mx-2">·</span>
-        <Link href="/frq" className="text-primary underline-offset-2 hover:underline">
-          Reasoning Studio
+        <Link href="/lesson/u6-ftc" className="text-primary underline-offset-2 hover:underline">
+          Open lesson 2
         </Link>
         <span className="mx-2">·</span>
-        <Link href="/course" className="text-primary underline-offset-2 hover:underline">
-          Course map
+        <Link href="/" className="text-primary underline-offset-2 hover:underline">
+          Calculus AB home
         </Link>
       </p>
     </article>

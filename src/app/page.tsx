@@ -1,108 +1,103 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { AcademicMethod } from "@/components/AcademicMethod";
-import { RedirectIfOnboarded } from "@/components/RedirectIfOnboarded";
-import { SITE } from "@/lib/site-config";
+import { PUBLIC_LESSON_META, studyStartUrl } from "@/lib/gate";
+import { buildMetadata, PUBLIC_DESCRIPTIONS } from "@/lib/site";
+
+export const metadata: Metadata = buildMetadata({
+  title: "Calculus AB · two open lessons",
+  description: PUBLIC_DESCRIPTIONS.home,
+  path: "/",
+});
 
 export default function Home() {
   return (
-    <>
-      <RedirectIfOnboarded />
-      <main className="relative min-h-screen overflow-hidden bg-paper">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.4]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 30h60M30 0v60' fill='none' stroke='%231a3a5c' stroke-width='0.4' opacity='0.12'/%3E%3C/svg%3E")`,
-          }}
-        />
+    <article className="mx-auto max-w-3xl">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        Self-prep studio · Calculus AB · May 2027
+      </p>
+      <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-4xl leading-[1.12] tracking-tight text-primary sm:text-5xl">
+        Start with why a limit is not a function value
+      </h1>
+      <p className="mt-6 text-lg leading-relaxed text-foreground/90">
+        Two lessons are public on purpose. No account. Work one idea, a short check, and what to do
+        next. After the second lesson we send you to the study desk for an email and a parent
+        WhatsApp — that form is not here.
+      </p>
+      <p className="mt-4 text-sm text-muted-foreground">
+        We would rather you learn the limit than buy a package. A mentor in Burjuman is here if you
+        want one later.
+      </p>
 
-        <div className="relative mx-auto flex min-h-screen max-w-5xl flex-col px-6 py-10">
-          <header className="flex items-center justify-between gap-4">
-            <div className="font-[family-name:var(--font-playfair)] text-xl font-semibold tracking-tight text-ink">
-              {SITE.brand}
-            </div>
-            <div className="flex items-center gap-3 text-sm">
-              <Link href="/faculty" className="text-ink-muted hover:text-ink">
-                Faculty
-              </Link>
-              <Link href="/home" className="text-ink-muted hover:text-ink">
-                Continue
-              </Link>
-              <Link
-                href="/onboarding"
-                className="rounded-full bg-ink px-4 py-2 font-medium text-paper hover:bg-navy"
-              >
-                Begin
-              </Link>
-            </div>
-          </header>
+      <ol className="mt-10 space-y-4">
+        <li className="rounded-xl border bg-card p-5" style={{ borderColor: "#E4A31A" }}>
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Lesson 1 · open</p>
+          <h2 className="mt-1 font-[family-name:var(--font-playfair)] text-2xl text-primary">
+            {PUBLIC_LESSON_META["u1-limit-vs-value"].title}
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed">
+            Nearby behaviour is not the filled-in point. Move the point, keep the neighbourhood, and
+            say what changed.
+          </p>
+          <Link
+            href={PUBLIC_LESSON_META["u1-limit-vs-value"].href}
+            className="mt-4 inline-flex rounded-md px-4 py-2 text-sm font-medium text-primary-foreground"
+            style={{ background: "#1639A8" }}
+          >
+            Open lesson 1 — free, no account
+          </Link>
+        </li>
+        <li className="rounded-xl border bg-card p-5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Lesson 2 · open</p>
+          <h2 className="mt-1 font-[family-name:var(--font-playfair)] text-2xl text-primary">
+            {PUBLIC_LESSON_META["u6-ftc"].title}
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed">
+            Accumulation is signed. Geometric area is a related but different request. The
+            Fundamental Theorem connects a running integral to the original function.
+          </p>
+          <Link
+            href={PUBLIC_LESSON_META["u6-ftc"].href}
+            className="mt-4 inline-flex rounded-md border px-4 py-2 text-sm font-medium text-primary"
+          >
+            Open lesson 2
+          </Link>
+        </li>
+      </ol>
 
-          <section className="mt-16 grid flex-1 gap-12 lg:mt-24 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">
-                {SITE.course} · {SITE.examYear} exam
-              </p>
-              <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-5xl leading-[1.08] tracking-tight text-ink sm:text-6xl">
-                {SITE.tagline}
-              </h1>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
-                {SITE.description} Built for students who want a serious, structured path — not another
-                question dump.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/onboarding"
-                  className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-ink hover:bg-gold-soft"
-                >
-                  Start the diagnostic
-                </Link>
-                <Link
-                  href="/course"
-                  className="rounded-full border border-rule px-6 py-3 text-sm font-medium text-ink hover:bg-paper-soft"
-                >
-                  Browse the course
-                </Link>
-              </div>
-            </div>
+      <section className="mt-12 space-y-3 text-sm leading-relaxed">
+        <h2 className="font-[family-name:var(--font-playfair)] text-xl text-primary">
+          How the two open lessons work
+        </h2>
+        <ol className="list-decimal space-y-2 pl-5">
+          <li>Open a lesson. Stay honest with the independent check.</li>
+          <li>Finish both. No login on these two pages.</li>
+          <li>
+            Tell us where you got stuck. If you want a human after that, we are in Burjuman. If you
+            do not, keep going.
+          </li>
+        </ol>
+        <p className="text-muted-foreground">
+          The rest of the eight-unit map is still being written. Unpublished units go to a waitlist
+          on the study desk — they do not 404.
+        </p>
+      </section>
 
-            <div className="rounded-3xl border border-rule bg-paper-soft p-6 shadow-[0_24px_80px_-48px_rgba(26,58,92,0.55)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">The method</p>
-              <ul className="mt-4 space-y-4 text-sm text-ink">
-                <li>
-                  <span className="font-semibold">Mastery before volume.</span> Skills stay locked until the
-                  diagnostic and spaced review say you’re ready.
-                </li>
-                <li>
-                  <span className="font-semibold">Exam-shaped practice.</span> MCQ, FRQ, and calculator
-                  policy are taught as they appear on the {SITE.examYear} paper.
-                </li>
-                <li>
-                  <span className="font-semibold">A tutor who remembers you.</span> Ask Anannt about a
-                  stuck skill — the thread stays attached to that lesson.
-                </li>
-              </ul>
-            </div>
-          </section>
+      <div className="mt-8 flex flex-wrap gap-3 text-sm">
+        <Link href="/exam/2027" className="text-primary underline-offset-2 hover:underline">
+          2027 exam guide
+        </Link>
+        <Link href="/onboarding" className="text-primary underline-offset-2 hover:underline">
+          Start a short diagnostic
+        </Link>
+        <a href={studyStartUrl({ intent: "waitlist" })} className="text-primary underline-offset-2 hover:underline">
+          Ask when later units are ready
+        </a>
+      </div>
 
-          <AcademicMethod />
-
-          <footer className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-rule pt-6 text-xs text-ink-muted">
-            <p>
-              {SITE.legalName} · Independent AP Calculus AB platform · Not affiliated with College Board
-            </p>
-            <div className="flex gap-4">
-              <Link href="/privacy" className="hover:text-ink">
-                Privacy
-              </Link>
-              <Link href="/faq" className="hover:text-ink">
-                FAQ
-              </Link>
-              <Link href="/about" className="hover:text-ink">
-                About
-              </Link>
-            </div>
-          </footer>
-        </div>
-      </main>
-    </>
+      <div className="mt-12">
+        <AcademicMethod />
+      </div>
+    </article>
   );
 }

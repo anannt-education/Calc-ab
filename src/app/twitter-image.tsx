@@ -13,14 +13,15 @@ export default function TwitterImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: 80,
-          background: "#1B3A5F",
-          color: "#F7F4EC",
+          background: "#0F245C",
+          color: "#F4EFE4",
         }}
       >
-        <div style={{ color: "#C4A35A", fontSize: 28 }}>Anannt Education</div>
-        <div style={{ fontSize: 64, fontWeight: 700, marginTop: 20 }}>AP Calculus AB</div>
-        <div style={{ fontSize: 26, marginTop: 16, color: "#E8E0C8" }}>
-          Independent 2027 exam preparation
+        <div style={{ color: "#E4A31A", fontSize: 22 }}>Anannt Study</div>
+        <div style={{ height: 1, width: 120, background: "#E4A31A", marginTop: 12 }} />
+        <div style={{ fontSize: 58, fontWeight: 700, marginTop: 20 }}>Calculus AB</div>
+        <div style={{ fontSize: 24, marginTop: 16, color: "#F4EFE4" }}>
+          Two open lessons · May 2027 planning
         </div>
       </div>
     ),

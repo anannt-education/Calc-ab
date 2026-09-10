@@ -4,8 +4,9 @@ import { buildMetadata } from "@/lib/site";
 export const metadata: Metadata = buildMetadata({
   title: "Course map",
   description:
-    "Eight AP Calculus AB units plus Anannt’s foundation bridge. CED-aligned lessons on limits, FTC, FRQ-ready reasoning. Completion is not mastery.",
+    "Calculus AB map: two public lessons are open. Later units are unpublished and go to a waitlist, not a missing page.",
   path: "/course",
+  noIndex: true,
 });
 
 export default function CourseLayout({ children }: { children: React.ReactNode }) {

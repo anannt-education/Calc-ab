@@ -8,6 +8,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { ITEM_BY_ID, LESSON_BY_ID, SKILL_BY_ID } from "@/lib/content";
 import { nowISO } from "@/lib/storage";
 import type { ErrorClass } from "@/lib/types";
+import { isPublicLessonId, PUBLIC_LESSON_META, studyStartUrl } from "@/lib/gate";
 
 export function LessonWorkspace({ id }: { id: string }) {
   const lesson = LESSON_BY_ID[id];
@@ -146,6 +147,10 @@ export function LessonWorkspace({ id }: { id: string }) {
                 if (p.result.correct && p.confidence !== "low") {
                   markLesson(id, "independently_demonstrated");
                   log("independent_check_passed", { itemId: item.id, lessonId: id });
+                  if (id === "u6-ftc") {
+                    log("lesson2_complete", { itemId: item.id, lessonId: id });
+                    window.location.assign(studyStartUrl({ unit: "u6" }));
+                  }
                 }
                 if (p.result.correct === false) {
                   addMistake({
@@ -184,6 +189,34 @@ export function LessonWorkspace({ id }: { id: string }) {
             />
           ))}
         </section>
+      )}
+
+      {isPublicLessonId(id) && (
+        <div className="mt-10 rounded-xl border bg-card p-4">
+          {id === "u1-limit-vs-value" ? (
+            <>
+              <p className="text-sm">
+                When you have worked the idea, continue to the second open lesson. Still no account.
+              </p>
+              <Link
+                href={PUBLIC_LESSON_META["u6-ftc"].href}
+                className={`${buttonVariants()} mt-3 inline-flex`}
+              >
+                Continue to lesson 2 — FTC accumulation
+              </Link>
+            </>
+          ) : (
+            <>
+              <p className="text-sm">
+                After this second open lesson, the study desk asks for an email and a parent
+                WhatsApp. That form is not on this page.
+              </p>
+              <a href={studyStartUrl({ unit: "u6" })} className={`${buttonVariants()} mt-3 inline-flex`}>
+                I’ve finished the two open lessons
+              </a>
+            </>
+          )}
+        </div>
       )}
 
       <p id="report-math" className="mt-8 text-xs text-muted-foreground">

@@ -4,8 +4,9 @@ import { buildMetadata } from "@/lib/site";
 export const metadata: Metadata = buildMetadata({
   title: "Ask Anannt",
   description:
-    "Ask Anannt faculty hint ladder for AP Calculus AB: restate, question, strategy, then one step. Not an unrestricted chatbot.",
+    "Ask Anannt faculty hint ladder for Calculus AB: restate, question, strategy, then one step. Not an unrestricted chatbot.",
   path: "/ask",
+  noIndex: true,
 });
 
 export default function AskLayout({ children }: { children: React.ReactNode }) {

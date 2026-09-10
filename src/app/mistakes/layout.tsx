@@ -6,6 +6,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Classified calculus mix-ups with a next step and a scheduled fresh question. Same-family repeats do not add mastery evidence.",
   path: "/mistakes",
+  noIndex: true,
 });
 
 export default function MistakesLayout({ children }: { children: React.ReactNode }) {
