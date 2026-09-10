@@ -9,6 +9,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: [
+          root,
           `${root}/`,
           `${root}/lesson/u1-limit-vs-value`,
           `${root}/lesson/u6-ftc`,
