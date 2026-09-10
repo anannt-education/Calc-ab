@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { BASE_PATH, SITE_ORIGIN } from "./gate";
 
+export { BASE_PATH, SITE_ORIGIN };
+
 /** Canonical origin for metadataBase, OG, and JSON-LD. Paths add `/calculus-ab`. */
 export const SITE_URL = SITE_ORIGIN;
 export const SITE_NAME = "Anannt Education";

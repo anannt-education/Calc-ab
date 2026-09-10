@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-import { BASE_PATH } from "@/lib/gate";
-import { SITE_ORIGIN } from "@/lib/site";
+import { BASE_PATH, SITE_ORIGIN } from "@/lib/gate";
 
 export default function robots(): MetadataRoute.Robots {
   return {
