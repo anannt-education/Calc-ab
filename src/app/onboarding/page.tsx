@@ -119,6 +119,7 @@ function OnboardingInner() {
         onSubmit={(e) => {
           e.preventDefault();
           saveProfile({ ...form, skippedOptional: skipOptional });
+          log("diagnostic_start", {});
           setStep("diagnostic");
         }}
         action="#"
@@ -242,6 +243,7 @@ function OnboardingInner() {
             type="button"
             onClick={() => {
               saveProfile({ ...form, skippedOptional: skipOptional });
+              log("diagnostic_start", {});
               setStep("diagnostic");
             }}
           >
@@ -252,6 +254,7 @@ function OnboardingInner() {
             variant="outline"
             onClick={() => {
               saveProfile({ ...form, skippedOptional: true });
+              log("diagnostic_start", {});
               setStep("diagnostic");
             }}
           >
