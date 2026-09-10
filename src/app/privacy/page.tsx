@@ -1,12 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/site";
+import { PUBLIC_META, buildMetadata } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Privacy",
-  description:
-    "Anannt AP Calculus AB privacy note: this demo stores progress locally in your browser. Minimum data, no account wall.",
-  path: "/privacy",
+  title: PUBLIC_META.privacy.title,
+  description: PUBLIC_META.privacy.description,
+  path: PUBLIC_META.privacy.path,
 });
 
 export default function PrivacyPage() {

@@ -19,12 +19,20 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { unitId } = await params;
   const unit = UNIT_BY_ID[unitId];
-  if (!unit) return buildMetadata({ title: "Unit", description: "Unit not in this course.", path: `/course/${unitId}` });
+  if (!unit) {
+    return buildMetadata({
+      title: "Unit",
+      description: "Unit not in this Calculus AB studio.",
+      path: `/course/${unitId}`,
+      noIndex: true,
+    });
+  }
   return buildMetadata({
     title: unit.number === "F" ? "Foundation bridge" : unitShortTitle(unit),
     description: plainText(`${unit.officialLabel}. ${unit.overview} MCQ weight ${unit.mcqWeight}.`),
     path: `/course/${unitId}`,
-    keywords: ["AP Calculus AB 2027", unit.title, "Anannt Education", "limits", "FTC"],
+    noIndex: true,
+    keywords: ["Calculus AB 2027", unit.title, "Anannt Education", "limits", "FTC"],
   });
 }
 
@@ -143,7 +151,7 @@ export default async function UnitPage({ params }: { params: Promise<{ unitId: s
 
       <p className="mt-8 text-sm">
         <Link href="/course" className="text-primary underline-offset-2 hover:underline">
-          Back to the eight-unit map
+          Back to what is open
         </Link>
       </p>
     </article>

@@ -62,8 +62,10 @@ export type Confidence = "low" | "medium" | "high";
 export type FeedbackLevel = "self-review" | "provisional" | "faculty-reviewed";
 
 export type AnalyticsEventName =
+  | "diagnostic_start"
   | "diagnostic_completed"
   | "lesson_check_submitted"
+  | "lesson2_complete"
   | "hint_used"
   | "independent_check_passed"
   | "review_due"

@@ -18,9 +18,9 @@ export default function TwitterImage() {
         }}
       >
         <div style={{ color: "#C4A35A", fontSize: 28 }}>Anannt Education</div>
-        <div style={{ fontSize: 64, fontWeight: 700, marginTop: 20 }}>AP Calculus AB</div>
+        <div style={{ fontSize: 64, fontWeight: 700, marginTop: 20 }}>Calculus AB</div>
         <div style={{ fontSize: 26, marginTop: 16, color: "#E8E0C8" }}>
-          Independent 2027 exam preparation
+          Two public lessons for May 2027 self-prep
         </div>
       </div>
     ),

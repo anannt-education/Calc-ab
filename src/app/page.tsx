@@ -1,108 +1,93 @@
 import Link from "next/link";
 import { AcademicMethod } from "@/components/AcademicMethod";
-import { RedirectIfOnboarded } from "@/components/RedirectIfOnboarded";
-import { SITE } from "@/lib/site-config";
+import { LESSON_1_ID, LESSON_2_ID } from "@/lib/gate";
+import { PUBLIC_META, buildMetadata } from "@/lib/site";
+
+export const metadata = buildMetadata({
+  title: PUBLIC_META.home.title,
+  description: PUBLIC_META.home.description,
+  path: PUBLIC_META.home.path,
+});
 
 export default function Home() {
   return (
-    <>
-      <RedirectIfOnboarded />
-      <main className="relative min-h-screen overflow-hidden bg-paper">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.4]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 30h60M30 0v60' fill='none' stroke='%231a3a5c' stroke-width='0.4' opacity='0.12'/%3E%3C/svg%3E")`,
-          }}
-        />
+    <div className="mx-auto max-w-3xl">
+      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber">
+        Self-prep studio · May 2027 exams
+      </p>
+      <h1 className="mt-4 font-[family-name:var(--font-serif)] text-4xl leading-[1.12] tracking-tight text-primary sm:text-5xl">
+        In college you will prepare on your own. This is that practice, with a desk that cares.
+      </h1>
+      <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+        Nobody should have to guess what to study tonight. These two Calculus AB lessons walk you
+        through one idea, a short check, and what to do next — written by people who have sat with
+        Dubai students who felt behind in March and still made the exam. The first two lessons are
+        open. No account. No pitch.
+      </p>
+      <p className="mt-4 text-sm text-muted-foreground">
+        We would rather you learn the limit than buy a package. A mentor in Burjuman is here if you
+        want one later.
+      </p>
 
-        <div className="relative mx-auto flex min-h-screen max-w-5xl flex-col px-6 py-10">
-          <header className="flex items-center justify-between gap-4">
-            <div className="font-[family-name:var(--font-playfair)] text-xl font-semibold tracking-tight text-ink">
-              {SITE.brand}
-            </div>
-            <div className="flex items-center gap-3 text-sm">
-              <Link href="/faculty" className="text-ink-muted hover:text-ink">
-                Faculty
-              </Link>
-              <Link href="/home" className="text-ink-muted hover:text-ink">
-                Continue
-              </Link>
-              <Link
-                href="/onboarding"
-                className="rounded-full bg-ink px-4 py-2 font-medium text-paper hover:bg-navy"
-              >
-                Begin
-              </Link>
-            </div>
-          </header>
+      <div className="mt-8 flex flex-wrap gap-3">
+        <Link
+          href={`/lesson/${LESSON_1_ID}`}
+          className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90"
+        >
+          Start lesson 1 — limit vs function value
+        </Link>
+        <Link
+          href={`/lesson/${LESSON_2_ID}`}
+          className="rounded-full border px-6 py-3 text-sm font-medium hover:bg-muted"
+        >
+          Lesson 2 — FTC accumulation
+        </Link>
+      </div>
 
-          <section className="mt-16 grid flex-1 gap-12 lg:mt-24 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">
-                {SITE.course} · {SITE.examYear} exam
-              </p>
-              <h1 className="mt-4 font-[family-name:var(--font-playfair)] text-5xl leading-[1.08] tracking-tight text-ink sm:text-6xl">
-                {SITE.tagline}
-              </h1>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
-                {SITE.description} Built for students who want a serious, structured path — not another
-                question dump.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/onboarding"
-                  className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-ink hover:bg-gold-soft"
-                >
-                  Start the diagnostic
-                </Link>
-                <Link
-                  href="/course"
-                  className="rounded-full border border-rule px-6 py-3 text-sm font-medium text-ink hover:bg-paper-soft"
-                >
-                  Browse the course
-                </Link>
-              </div>
-            </div>
+      <p className="mt-4 text-sm text-muted-foreground">
+        Two deep lessons. The eight-unit map is still being written. After lesson 2, the study desk
+        at{" "}
+        <a className="underline-offset-2 hover:underline" href="https://study.anannt.ae/">
+          study.anannt.ae
+        </a>{" "}
+        asks for email and a parent WhatsApp. That form is not here.
+      </p>
 
-            <div className="rounded-3xl border border-rule bg-paper-soft p-6 shadow-[0_24px_80px_-48px_rgba(26,58,92,0.55)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">The method</p>
-              <ul className="mt-4 space-y-4 text-sm text-ink">
-                <li>
-                  <span className="font-semibold">Mastery before volume.</span> Skills stay locked until the
-                  diagnostic and spaced review say you’re ready.
-                </li>
-                <li>
-                  <span className="font-semibold">Exam-shaped practice.</span> MCQ, FRQ, and calculator
-                  policy are taught as they appear on the {SITE.examYear} paper.
-                </li>
-                <li>
-                  <span className="font-semibold">A tutor who remembers you.</span> Ask Anannt about a
-                  stuck skill — the thread stays attached to that lesson.
-                </li>
-              </ul>
-            </div>
-          </section>
+      <section className="mt-12 rounded-2xl border bg-card p-5">
+        <h2 className="text-lg font-semibold text-primary">How the two free lessons work</h2>
+        <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm">
+          <li>Open this subject. Two lessons are public on purpose.</li>
+          <li>Finish two lessons. No login. Stay honest with the independent check.</li>
+          <li>
+            Tell us where you got stuck. If you want a human after that, we are in Burjuman. If you
+            do not, keep going.
+          </li>
+        </ol>
+      </section>
 
-          <AcademicMethod />
+      <p className="mt-8 rounded-xl border border-dashed p-4 text-sm">
+        This is written for a student with a quiet hour in Dubai, Sharjah, Abu Dhabi, or anywhere. If
+        today is a bad brain day, stop after the worked example. Come back tomorrow. The path will
+        still be here.
+      </p>
 
-          <footer className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-rule pt-6 text-xs text-ink-muted">
-            <p>
-              {SITE.legalName} · Independent AP Calculus AB platform · Not affiliated with College Board
-            </p>
-            <div className="flex gap-4">
-              <Link href="/privacy" className="hover:text-ink">
-                Privacy
-              </Link>
-              <Link href="/faq" className="hover:text-ink">
-                FAQ
-              </Link>
-              <Link href="/about" className="hover:text-ink">
-                About
-              </Link>
-            </div>
-          </footer>
-        </div>
-      </main>
-    </>
+      <div className="mt-10">
+        <AcademicMethod />
+      </div>
+
+      <p className="mt-8 text-sm">
+        <Link href="/exam/2027" className="text-primary underline-offset-2 hover:underline">
+          2027 exam guide
+        </Link>
+        <span className="mx-2">·</span>
+        <Link href="/course" className="text-primary underline-offset-2 hover:underline">
+          What is open
+        </Link>
+        <span className="mx-2">·</span>
+        <Link href="/onboarding" className="text-primary underline-offset-2 hover:underline">
+          Start the diagnostic
+        </Link>
+      </p>
+    </div>
   );
 }

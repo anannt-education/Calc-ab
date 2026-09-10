@@ -51,7 +51,7 @@ export default function OpenGraphImage() {
           AP Calculus AB
         </div>
         <div style={{ fontSize: 28, marginTop: 16, maxWidth: 900, lineHeight: 1.35, color: "#E8E0C8" }}>
-          Independent preparation for the 2027 hybrid digital exam — limits, FTC, FRQ reasoning.
+        Independent Calculus AB self-prep for May 2027 — two public lessons: limits, then FTC.
         </div>
         <div style={{ fontSize: 18, marginTop: 36, color: "#C4A35A" }}>
           Not affiliated with College Board · No score predictions

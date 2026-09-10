@@ -10,7 +10,8 @@ import { MathHtml } from "@/components/MathHtml";
 import { LESSON_BY_ID, LESSONS, SKILL_BY_ID, UNIT_BY_ID } from "@/lib/content";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { facultyById } from "@/lib/faculty";
-import { buildMetadata, plainText } from "@/lib/site";
+import { LESSON_1_ID, LESSON_2_ID } from "@/lib/gate";
+import { PUBLIC_META, buildMetadata, plainText } from "@/lib/site";
 
 const SHORT_TITLE: Record<string, string> = {
   "u1-limit-vs-value": "Limit versus function value",
@@ -45,22 +46,38 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const lesson = LESSON_BY_ID[id];
-  if (!lesson) return buildMetadata({ title: "Lesson", description: "Lesson not in this course slice.", path: `/lesson/${id}` });
+  if (!lesson) {
+    return buildMetadata({
+      title: "Lesson",
+      description: "Lesson not in this Calculus AB studio slice.",
+      path: `/lesson/${id}`,
+      noIndex: true,
+    });
+  }
+  if (id === LESSON_1_ID) {
+    return buildMetadata({
+      title: PUBLIC_META.lesson1.title,
+      description: PUBLIC_META.lesson1.description,
+      path: PUBLIC_META.lesson1.path,
+      type: "article",
+    });
+  }
+  if (id === LESSON_2_ID) {
+    return buildMetadata({
+      title: PUBLIC_META.lesson2.title,
+      description: PUBLIC_META.lesson2.description,
+      path: PUBLIC_META.lesson2.path,
+      type: "article",
+    });
+  }
   return buildMetadata({
     title: SHORT_TITLE[lesson.id] ?? lesson.title,
     description: plainText(
-      `${lesson.title}. ${lesson.objective} Anannt AP Calculus AB — independent 2027 prep.`
+      `${lesson.title}. ${lesson.objective} Calculus AB studio — still behind the two-lesson gate.`
     ),
     path: `/lesson/${id}`,
     type: "article",
-    keywords: [
-      "AP Calculus AB 2027",
-      lesson.title,
-      "Anannt Education",
-      "limits",
-      "FTC",
-      "FRQ practice",
-    ],
+    noIndex: true,
   });
 }
 
