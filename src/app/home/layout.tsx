@@ -4,8 +4,9 @@ import { buildMetadata } from "@/lib/site";
 export const metadata: Metadata = buildMetadata({
   title: "Today’s next task",
   description:
-    "Your Anannt recommended next task for AP Calculus AB, with a tutor-style reason: why this, why now, and what it unlocks.",
+    "Your Anannt recommended next task for Calculus AB, with a tutor-style reason: why this, why now, and what it unlocks.",
   path: "/home",
+  noIndex: true,
 });
 
 export default function HomeLayout({ children }: { children: React.ReactNode }) {

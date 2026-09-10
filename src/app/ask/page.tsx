@@ -6,6 +6,7 @@ import { PageTitle } from "@/components/AppShell";
 import { MathText } from "@/components/MathText";
 import { useStudent } from "@/components/StudentProvider";
 import { LESSON_BY_ID } from "@/lib/content";
+import { apiUrl } from "@/lib/gate";
 import { Button } from "@/components/ui/button";
 
 export default function AskPage() {
@@ -40,7 +41,7 @@ function AskInner() {
     }
     const nextLevel = wantSolution ? level : Math.min(4, level + 1);
     setPending(true);
-    const res = await fetch("/api/ask", {
+    const res = await fetch(apiUrl("/api/ask"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

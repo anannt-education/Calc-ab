@@ -4,16 +4,15 @@ import { ExamFormatTable } from "@/components/ExamFormatTable";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { COURSE } from "@/lib/exam-config";
-import { buildMetadata } from "@/lib/site";
+import { buildMetadata, PUBLIC_SEO } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "2027 AP Calculus AB exam guide",
-  description:
-    "Anannt’s explanation of the 2027 AP Calculus AB hybrid digital format: 42 MCQ, 6 FRQ, four parts, calculator rules. Links to official College Board pages.",
-  path: "/exam/2027",
+  title: PUBLIC_SEO.exam.title,
+  description: PUBLIC_SEO.exam.description,
+  path: PUBLIC_SEO.exam.path,
   keywords: [
-    "AP Calculus AB 2027",
-    "hybrid digital AP Calculus",
+    "Calculus AB 2027",
+    "hybrid digital Calculus AB",
     "42 MCQ",
     "FRQ practice",
     "Anannt Education",

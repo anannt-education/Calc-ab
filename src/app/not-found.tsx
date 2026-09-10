@@ -16,7 +16,7 @@ export default function NotFound() {
           Home
         </Link>
         <Link href="/" className="underline">
-          Anannt landing
+          Calculus AB home
         </Link>
       </div>
     </div>

@@ -1,12 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/site";
+import { buildMetadata, PUBLIC_SEO } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Privacy",
-  description:
-    "Anannt AP Calculus AB privacy note: this demo stores progress locally in your browser. Minimum data, no account wall.",
-  path: "/privacy",
+  title: PUBLIC_SEO.privacy.title,
+  description: PUBLIC_SEO.privacy.description,
+  path: PUBLIC_SEO.privacy.path,
 });
 
 export default function PrivacyPage() {
@@ -19,10 +18,11 @@ export default function PrivacyPage() {
         Privacy (this demo)
       </h1>
       <p className="mt-3 text-base leading-relaxed">
-        This public slice is a local demo. There is no login wall. Progress, attempts, mistake notes,
-        and simulated FRQ uploads are stored in your browser under the key{" "}
-        <code>anannt-ab-student-v1</code>. Clearing site data removes them. We do not open an Anannt
-        account for you by visiting.
+        This public slice stores progress locally. Lesson 1, lesson 2, and the diagnostic start
+        need no account. Progress, attempts, mistake notes, and simulated FRQ uploads are stored in
+        your browser under the key{" "}
+        <code>anannt-ab-student-v1</code>. Clearing site data removes them. Later lessons, mocks, and
+        the mentor queue continue on study.anannt.ae after you verify.
       </p>
       <section className="mt-8 space-y-3 text-sm">
         <h2 className="text-lg font-semibold text-primary">What we collect here</h2>
