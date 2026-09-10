@@ -16,10 +16,12 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useStudent } from "./StudentProvider";
-import { TRUST_LINE } from "@/lib/site";
+import { WhatsAppLink } from "./WhatsAppLink";
+import { PUBLIC_LESSON_1, PUBLIC_LESSON_2, unitFromPathname } from "@/lib/gate";
+import { FOOTER_CONTACT, FOOTER_SUPPLEMENT, FOOTER_TRADEMARK } from "@/lib/site";
 
 const NAV = [
-  { href: "/home", label: "Home", icon: Home },
+  { href: "/", label: "Home", icon: Home },
   { href: "/course", label: "Course", icon: BookOpen },
   { href: "/practice", label: "Practice", icon: ClipboardList },
   { href: "/mistakes", label: "Mistakes", icon: NotebookPen },
@@ -31,12 +33,10 @@ const NAV = [
 
 const PUBLIC_FOOTER = [
   { href: "/", label: "Home" },
-  { href: "/course", label: "Course map" },
-  { href: "/lesson/u1-limit-vs-value", label: "Sample: limits" },
-  { href: "/lesson/u6-ftc", label: "Sample: FTC" },
+  { href: `/lesson/${PUBLIC_LESSON_1}`, label: "Lesson 1: limits" },
+  { href: `/lesson/${PUBLIC_LESSON_2}`, label: "Lesson 2: FTC" },
   { href: "/exam/2027", label: "2027 exam guide" },
-  { href: "/about", label: "Academic approach" },
-  { href: "/faculty", label: "Faculty" },
+  { href: "/onboarding", label: "Diagnostic" },
   { href: "/faq", label: "FAQ" },
   { href: "/privacy", label: "Privacy" },
 ];
@@ -45,7 +45,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
   const { state, setState } = useStudent();
   const hideNav = path.startsWith("/mock/sit") || path.startsWith("/onboarding");
-  const homeHref = state.profile?.diagnosticCompleted ? "/home" : "/";
+  const sku = unitFromPathname(path);
 
   useEffect(() => {
     if (path.startsWith("/mock/sit")) return;
@@ -66,18 +66,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </a>
       <header className="border-b bg-card/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
-          <Link href={homeHref} className="flex items-center gap-2 rounded-md focus-visible:ring-2 focus-visible:ring-ring">
+          <Link href="/" className="flex items-center gap-2 rounded-md focus-visible:ring-2 focus-visible:ring-ring">
             <span className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground" aria-hidden>
               ∫
             </span>
             <span>
               <span className="block text-sm font-semibold tracking-tight">Anannt Education</span>
-              <span className="block text-xs text-muted-foreground">AP Calculus AB · 2027</span>
+              <span className="block text-xs text-muted-foreground">Calculus AB · self-study</span>
             </span>
           </Link>
           {!hideNav && (
             <p className="hidden text-xs text-muted-foreground sm:block">
-              Independent prep · not a College Board score
+              Self-study supplement · not a predicted AP score
             </p>
           )}
           <Link
@@ -91,7 +91,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <nav aria-label="Student" className="mx-auto max-w-6xl overflow-x-auto px-2 pb-2">
             <ul className="flex min-w-max gap-1">
               {NAV.map((n) => {
-                const active = path === n.href || (n.href !== "/home" && path.startsWith(n.href + "/"));
+                const active =
+                  n.href === "/"
+                    ? path === "/"
+                    : path === n.href || path.startsWith(n.href + "/");
                 const Icon = n.icon;
                 return (
                   <li key={n.href}>
@@ -119,8 +122,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {children}
       </main>
       <footer className="border-t px-4 py-6 text-xs text-muted-foreground">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-center font-medium text-foreground/80">{TRUST_LINE}</p>
+        <div className="mx-auto max-w-6xl space-y-2">
+          <p className="text-center">{FOOTER_TRADEMARK}</p>
+          <p className="text-center">{FOOTER_SUPPLEMENT}</p>
+          <p className="text-center font-medium text-foreground/80">{FOOTER_CONTACT}</p>
           <nav aria-label="Footer" className="mt-3">
             <ul className="flex flex-wrap justify-center gap-x-3 gap-y-1">
               {PUBLIC_FOOTER.map((l) => (
@@ -130,18 +135,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   </Link>
                 </li>
               ))}
+              <li>
+                <WhatsAppLink sku={sku}>WhatsApp</WhatsAppLink>
+              </li>
             </ul>
           </nav>
-          <p className="mt-3 text-center">
-            Practice composites are internal percentages, not AP score predictions.{" "}
-            <Link href="/cms" className="underline-offset-2 hover:underline">
-              Academic CMS
-            </Link>
-            <span className="mx-2">·</span>
-            <Link href="/mentor" className="underline-offset-2 hover:underline">
-              Mentor queue
-            </Link>
-          </p>
         </div>
       </footer>
     </div>

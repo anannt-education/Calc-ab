@@ -1,7 +1,7 @@
 "use client";
 
-import { Suspense, useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +11,7 @@ import { PracticeItem } from "@/components/PracticeItem";
 import { useStudent } from "@/components/StudentProvider";
 import { DIAGNOSTIC_ITEM_IDS, ITEM_BY_ID } from "@/lib/content";
 import { SKILL_BY_ID } from "@/lib/content/skills";
+import { studyGateUrl } from "@/lib/gate";
 import { defaultProfile, SCHOOL_TOPICS } from "@/lib/storage";
 import type { OnboardingProfile } from "@/lib/types";
 
@@ -26,13 +27,18 @@ function OnboardingInner() {
   const params = useSearchParams();
   const startDiag = params.get("step") === "diagnostic";
   const { state, setState, recordAttempt, log } = useStudent();
-  const router = useRouter();
   const [step, setStep] = useState<"profile" | "diagnostic">(startDiag ? "diagnostic" : "profile");
   const [form, setStateForm] = useState<OnboardingProfile>(
     state.profile ?? defaultProfile({ skippedOptional: false })
   );
   const [qIndex, setQIndex] = useState(0);
   const [skipOptional, setSkipOptional] = useState(false);
+
+  useEffect(() => {
+    if (step === "diagnostic") {
+      log("diagnostic_start", { subject: "calculus-ab" });
+    }
+  }, [step, log]);
 
   const items = useMemo(() => DIAGNOSTIC_ITEM_IDS.map((id) => ITEM_BY_ID[id]).filter(Boolean), []);
   const current = items[qIndex];
@@ -46,8 +52,8 @@ function OnboardingInner() {
       ...s,
       profile: { ...(s.profile ?? form), diagnosticCompleted: true },
     }));
-    log("diagnostic_completed", { items: items.length });
-    router.push("/home");
+    log("diagnostic_completed", { items: items.length, subject: "calculus-ab" });
+    window.location.assign(studyGateUrl("u1"));
   }
 
   if (step === "diagnostic" && current) {
@@ -211,7 +217,7 @@ function OnboardingInner() {
             <div className="mt-3 space-y-3">
               <Field label="Optional target score (not a promise)">
                 <Input
-                  placeholder="e.g. 4 — this is a hope, not a guaranteed outcome"
+                  placeholder="e.g. 4 — this is a hope, not an outcome we can promise"
                   value={form.targetScore ?? ""}
                   onChange={(e) => setStateForm({ ...form, targetScore: e.target.value })}
                 />

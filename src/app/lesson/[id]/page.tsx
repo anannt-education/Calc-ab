@@ -10,7 +10,8 @@ import { MathHtml } from "@/components/MathHtml";
 import { LESSON_BY_ID, LESSONS, SKILL_BY_ID, UNIT_BY_ID } from "@/lib/content";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { facultyById } from "@/lib/faculty";
-import { buildMetadata, plainText } from "@/lib/site";
+import { isPublicLessonId, PUBLIC_LESSON_1, PUBLIC_LESSON_2 } from "@/lib/gate";
+import { buildMetadata, plainText, PUBLIC_SEO } from "@/lib/site";
 
 const SHORT_TITLE: Record<string, string> = {
   "u1-limit-vs-value": "Limit versus function value",
@@ -45,22 +46,39 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const lesson = LESSON_BY_ID[id];
-  if (!lesson) return buildMetadata({ title: "Lesson", description: "Lesson not in this course slice.", path: `/lesson/${id}` });
+  if (!lesson) {
+    return buildMetadata({
+      title: "Lesson",
+      description: "Lesson not in this course slice.",
+      path: `/lesson/${id}`,
+      noIndex: true,
+    });
+  }
+  if (id === PUBLIC_LESSON_1) {
+    return buildMetadata({
+      title: PUBLIC_SEO.lesson1.title,
+      description: PUBLIC_SEO.lesson1.description,
+      path: PUBLIC_SEO.lesson1.path,
+      type: "article",
+    });
+  }
+  if (id === PUBLIC_LESSON_2) {
+    return buildMetadata({
+      title: PUBLIC_SEO.lesson2.title,
+      description: PUBLIC_SEO.lesson2.description,
+      path: PUBLIC_SEO.lesson2.path,
+      type: "article",
+    });
+  }
   return buildMetadata({
     title: SHORT_TITLE[lesson.id] ?? lesson.title,
     description: plainText(
-      `${lesson.title}. ${lesson.objective} Anannt AP Calculus AB — independent 2027 prep.`
+      `${lesson.title}. ${lesson.objective} Anannt Calculus AB — independent 2027 prep.`
     ),
     path: `/lesson/${id}`,
     type: "article",
-    keywords: [
-      "AP Calculus AB 2027",
-      lesson.title,
-      "Anannt Education",
-      "limits",
-      "FTC",
-      "FRQ practice",
-    ],
+    noIndex: !isPublicLessonId(id),
+    keywords: ["Calculus AB 2027", lesson.title, "Anannt Education", "limits", "FTC"],
   });
 }
 

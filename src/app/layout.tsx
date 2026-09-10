@@ -5,7 +5,7 @@ import { StudentProvider } from "@/components/StudentProvider";
 import { AppShell } from "@/components/AppShell";
 import { JsonLd } from "@/components/JsonLd";
 import { organizationJsonLd, courseJsonLd } from "@/lib/jsonld";
-import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { absoluteUrl, PUBLIC_SEO, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const sans = Source_Sans_3({
@@ -29,36 +29,34 @@ const mono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "AP Calculus AB 2027 | Anannt AP Calculus AB",
-    template: "%s | Anannt AP Calculus AB",
+    default: `${PUBLIC_SEO.home.title} | ${SITE_NAME}`,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Independent AP Calculus AB 2027 prep from Anannt Education: limits, FTC, FRQ practice, and an honest diagnostic. Not affiliated with College Board.",
-  applicationName: "Anannt AP Calculus AB",
+  description: PUBLIC_SEO.home.description,
+  applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
   keywords: [
-    "AP Calculus AB 2027",
+    "Calculus AB 2027",
     "Anannt Education",
     "limits",
     "Fundamental Theorem of Calculus",
-    "FRQ practice",
-    "AP Calculus diagnostic",
+    "self-study",
+    "Dubai",
   ],
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
     locale: "en_US",
-    title: "AP Calculus AB 2027 | Anannt AP Calculus AB",
-    description:
-      "Independent AP Calculus AB preparation for the 2027 hybrid digital exam. Faculty-reviewed lessons. No score guarantees.",
+    title: `${PUBLIC_SEO.home.title} | ${SITE_NAME}`,
+    description: PUBLIC_SEO.home.description,
+    url: absoluteUrl("/"),
   },
   twitter: {
     card: "summary_large_image",
-    title: "AP Calculus AB 2027 | Anannt AP Calculus AB",
-    description:
-      "Independent AP Calculus AB preparation. Limits, FTC, FRQ reasoning. Anannt Education — not affiliated with College Board.",
+    title: `${PUBLIC_SEO.home.title} | ${SITE_NAME}`,
+    description: PUBLIC_SEO.home.description,
   },
   robots: { index: true, follow: true },
   category: "education",

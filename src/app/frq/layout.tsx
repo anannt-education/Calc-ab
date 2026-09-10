@@ -4,8 +4,9 @@ import { buildMetadata } from "@/lib/site";
 export const metadata: Metadata = buildMetadata({
   title: "FRQ Reasoning Studio",
   description:
-    "Anannt Reasoning Studio: original AP Calculus AB free-response tasks, point-level rubrics, and labelled faculty review.",
+    "Anannt Reasoning Studio: original Calculus AB free-response tasks, point-level rubrics, and labelled faculty review.",
   path: "/frq",
+  noIndex: true,
 });
 
 export default function FrqLayout({ children }: { children: React.ReactNode }) {

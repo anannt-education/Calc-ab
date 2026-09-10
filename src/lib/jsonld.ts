@@ -18,10 +18,10 @@ export function courseJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Course",
-    name: "Anannt AP Calculus AB",
+    name: "Calculus AB self-study",
     description:
-      "Independent, faculty-reviewed preparation for AP Calculus AB (2027 hybrid digital format). Understand the idea, apply it independently, explain your reasoning, and show that you can still do it later. Not affiliated with College Board. No score guarantees.",
-    url: SITE_URL,
+      "Independent, faculty-reviewed self-study for Calculus AB (2027 hybrid digital format). Understand the idea, apply it independently, explain your reasoning. Not affiliated with College Board. No score predictions.",
+    url: absoluteUrl("/"),
     provider: {
       "@type": "EducationalOrganization",
       name: SITE_NAME,
@@ -32,9 +32,9 @@ export function courseJsonLd() {
     inLanguage: "en",
     hasCourseInstance: {
       "@type": "CourseInstance",
-      name: "Anannt AP Calculus AB — May 2027 preparation",
+      name: "Anannt Calculus AB — May 2027 self-study",
       courseMode: "online",
-      location: SITE_URL,
+      location: absoluteUrl("/"),
     },
   };
 }
@@ -43,9 +43,9 @@ export function programJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "EducationalOccupationalProgram",
-    name: "Anannt AP Calculus AB 2027 preparation",
+    name: "Anannt Calculus AB 2027 self-study",
     description:
-      "Self-paced academic programme covering the AP Calculus AB framework with Anannt Concept Lens, Method Choice, Error Clinic, Reasoning Studio, and Exam Review. Not an accredited degree and not a College Board programme.",
+      "Self-paced self-study covering the Calculus AB framework with Anannt Concept Lens, Method Choice, Error Clinic, Reasoning Studio, and Exam Review. Not an accredited degree and not a College Board programme.",
     provider: { "@type": "EducationalOrganization", name: SITE_NAME, url: SITE_URL },
     educationalProgramMode: "online",
     timeOfDay: "flexible",
@@ -83,7 +83,7 @@ export function facultyJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Anannt AP Calculus AB faculty reviewers",
+    name: "Anannt Calculus AB faculty reviewers",
     itemListElement: FACULTY.map((p, i) => ({
       "@type": "ListItem",
       position: i + 1,

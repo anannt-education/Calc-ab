@@ -6,8 +6,10 @@ import { PracticeItem } from "@/components/PracticeItem";
 import { useStudent } from "@/components/StudentProvider";
 import { buttonVariants } from "@/components/ui/button";
 import { ITEM_BY_ID, LESSON_BY_ID, SKILL_BY_ID } from "@/lib/content";
+import { PUBLIC_LESSON_1, PUBLIC_LESSON_2, studyGateUrl, unitFromLessonId } from "@/lib/gate";
 import { nowISO } from "@/lib/storage";
 import type { ErrorClass } from "@/lib/types";
+import { WhatsAppLink } from "@/components/WhatsAppLink";
 
 export function LessonWorkspace({ id }: { id: string }) {
   const lesson = LESSON_BY_ID[id];
@@ -190,6 +192,34 @@ export function LessonWorkspace({ id }: { id: string }) {
         If a stem, graph, or key looks ambiguous, use <strong>Report ambiguous mathematics</strong> on
         the item. Faculty keep a correction trail; we do not silently rewrite your past attempts.
       </p>
+
+      {id === PUBLIC_LESSON_1 && (
+        <p className="mt-8">
+          <Link href={`/lesson/${PUBLIC_LESSON_2}`} className={buttonVariants()}>
+            Continue to lesson 2: FTC accumulation
+          </Link>
+        </p>
+      )}
+
+      {id === PUBLIC_LESSON_2 && (
+        <div className="mt-8 space-y-3">
+          <button
+            type="button"
+            className={buttonVariants()}
+            onClick={() => {
+              markLesson(id, "studied");
+              log("lesson2_complete", { lessonId: id, unit: "u6", subject: "calculus-ab" });
+              window.location.assign(studyGateUrl("u6"));
+            }}
+          >
+            I have finished this lesson
+          </button>
+          <p className="text-sm">
+            Want help with this idea?{" "}
+            <WhatsAppLink sku={unitFromLessonId(id)}>WhatsApp Anannt in Burjuman</WhatsAppLink>.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
