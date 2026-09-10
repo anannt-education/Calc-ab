@@ -133,7 +133,7 @@ export function PracticeItem({
 
       {(item.type === "numeric" || item.type === "short") && !notLearned && (
         <div className="mt-4">
-          <Label htmlFor={`${item.id}-ans">Response</Label>
+          <Label htmlFor={`${item.id}-ans`}>Response</Label>
           <Input
             id={`${item.id}-ans`}
             className="mt-1 max-w-xs"
@@ -173,7 +173,7 @@ export function PracticeItem({
 
       {!mockActive && (
         <div className="mt-3">
-          <Label htmlFor={`${item.id}-scratch">Scratchwork (optional)</Label>
+          <Label htmlFor={`${item.id}-scratch`}>Scratchwork (optional)</Label>
           <Textarea
             id={`${item.id}-scratch`}
             className="mt-1"
@@ -195,7 +195,7 @@ export function PracticeItem({
 
       {reportOpen && (
         <div className="mt-3 rounded-md border p-3">
-          <Label htmlFor={`${item.id}-rep">What is ambiguous?</Label>
+          <Label htmlFor={`${item.id}-rep`}>What is ambiguous?</Label>
           <Textarea id={`${item.id}-rep`} className="mt-1" value={reportNote} onChange={(e) => setReportNote(e.target.value)} />
           <Button
             type="button"
