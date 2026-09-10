@@ -8,6 +8,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { ITEM_BY_ID, LESSON_BY_ID, SKILL_BY_ID } from "@/lib/content";
 import { nowISO } from "@/lib/storage";
 import type { ErrorClass } from "@/lib/types";
+import { LESSON_2_ID, studyStartUrl } from "@/lib/gate";
 
 export function LessonWorkspace({ id }: { id: string }) {
   const lesson = LESSON_BY_ID[id];
@@ -146,6 +147,10 @@ export function LessonWorkspace({ id }: { id: string }) {
                 if (p.result.correct && p.confidence !== "low") {
                   markLesson(id, "independently_demonstrated");
                   log("independent_check_passed", { itemId: item.id, lessonId: id });
+                  if (id === LESSON_2_ID) {
+                    log("lesson2_complete", { lessonId: id, via: "independent_check" });
+                    window.location.assign(studyStartUrl({ unit: "u6" }));
+                  }
                 }
                 if (p.result.correct === false) {
                   addMistake({

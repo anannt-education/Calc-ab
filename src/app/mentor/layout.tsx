@@ -3,7 +3,7 @@ import { buildMetadata } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
   title: "Mentor review queue",
-  description: "Demo Anannt mentor queue for a faculty-reviewed handwritten AP Calculus AB FRQ.",
+  description: "Demo Anannt mentor queue for a faculty-reviewed handwritten Calculus AB FRQ.",
   path: "/mentor",
   noIndex: true,
 });

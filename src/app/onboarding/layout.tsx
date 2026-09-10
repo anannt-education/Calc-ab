@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/site";
+import { PUBLIC_DESCRIPTIONS } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Onboarding diagnostic",
-  description:
-    "Anannt prerequisite diagnostic for AP Calculus AB 2027. “I have not learned this yet” is a placement fact, not a mistake.",
+  title: "Calculus AB diagnostic",
+  description: PUBLIC_DESCRIPTIONS.onboarding,
   path: "/onboarding",
 });
 

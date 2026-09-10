@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/site";
+import { gatedMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = buildMetadata({
-  title: "FRQ Reasoning Studio",
-  description:
-    "Anannt Reasoning Studio: original AP Calculus AB free-response tasks, point-level rubrics, and labelled faculty review.",
-  path: "/frq",
-});
+export const metadata: Metadata = gatedMetadata(
+  "FRQ Reasoning Studio",
+  "Original Calculus AB free-response tasks after the two public lessons. Session required. Not released College Board items.",
+  "/frq"
+);
 
 export default function FrqLayout({ children }: { children: React.ReactNode }) {
   return children;

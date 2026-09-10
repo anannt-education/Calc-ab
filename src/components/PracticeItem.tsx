@@ -11,6 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { MathText } from "./MathText";
 import { Flag } from "lucide-react";
 import { mentorNotLearned, mentorOnMiss, mentorOnSuccess } from "@/lib/mentor-copy";
+import { withBasePath } from "@/lib/site";
 
 export type MarkResult = {
   correct: boolean | null;
@@ -83,7 +84,7 @@ export function PracticeItem({
       context,
       mockActive: Boolean(mockActive),
     };
-    const res = await fetch("/api/mark", {
+    const res = await fetch(withBasePath("/api/mark"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

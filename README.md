@@ -1,25 +1,15 @@
-# Anannt AP Calculus AB Mastery Platform
+# Anannt Calculus AB (study.anannt.ae/calculus-ab)
 
-Student product slice for **Anannt Education**. Planning baseline: May 2027 AP Calculus AB (hybrid digital: 42 MCQ in 100 minutes + 6 FRQ in 90 minutes, four parts).
+Student product slice for **Anannt Education**, mounted at `https://study.anannt.ae/calculus-ab`.
 
-The product promise: understand the idea, apply it independently, explain your reasoning, and demonstrate that you can still do it later.
+Two public lessons, no account:
 
-This is not affiliated with or endorsed by College Board. Anannt practice composites are internal percentages, not official AP scores or predictions. Mocks are labelled self-administered.
+1. Limit versus function value (`/lesson/u1-limit-vs-value`)
+2. FTC and accumulation (`/lesson/u6-ftc`)
 
-## What this repo is
+After lesson 2, a diagnostic submit, or a visit to `/practice`, `/frq`, or `/mock`, this app redirects to `https://study.anannt.ae/start?subject=calculus-ab` (with `unit` when known). The study shell owns the gate form (first name, email OTP, parent WhatsApp required, role, age band, sitting May 2027, school type, intent, consent). Remaining units, mocks, and FRQ need the `anannt_study_session` cookie and are `noindex`.
 
-A Next.js App Router app with a quiet learning interface:
-
-- Onboarding and a short prerequisite diagnostic (“I have not learned this yet”)
-- Home with one recommended next task and a published reason
-- Course map for the eight official units plus a foundation bridge
-- Lesson workspace, including two deep lessons (limit vs function value; FTC accumulation)
-- Practice with server-side marking (answer keys stay off the client)
-- Mistake notebook, FRQ studio, 2027 mock centre, progress, Ask Anannt hint ladder
-- Demo mentor queue (mapped handwritten FRQ) and an academic CMS preview (authors cannot self-publish)
-- Public About, Faculty, 2027 exam guide, FAQ, and privacy pages
-
-Curriculum is original Anannt-authored. Do not copy College Board released items into this bank.
+This is not affiliated with or endorsed by College Board. Practice composites are internal percentages, not official AP scores. The eight-unit map is still being written.
 
 ## Run locally
 
@@ -30,42 +20,21 @@ npm install
 npm run dev
 ```
 
-The dev server binds `0.0.0.0:4327`. Open [http://127.0.0.1:4327](http://127.0.0.1:4327).
+Dev server: `0.0.0.0:4327`. With `basePath: '/calculus-ab'`, open [http://127.0.0.1:4327/calculus-ab](http://127.0.0.1:4327/calculus-ab).
 
 ```bash
 npm run build
 npm start
 ```
 
-Progress is stored in the browser (`localStorage` key `anannt-ab-student-v1`). There is no login wall. A demo student can onboard immediately.
+Progress is stored in the browser (`localStorage` key `anannt-ab-student-v1`).
 
-Public pages (academic approach, faculty, 2027 exam guide, FAQ, privacy, unit and lesson articles) are server-rendered for search engines. Students who have finished the diagnostic are sent to `/home` after the landing HTML is produced.
+## SEO
 
-## SEO and canonical host
+`metadataBase` / canonical / OG origin: `https://study.anannt.ae`. Public URLs are under `/calculus-ab`. `robots.txt` allows the subject home and lessons 1–2; it disallows `/mock`, `/api`, `/keys`. The sitemap lists public URLs only.
 
-`metadataBase` is `https://apcalc.anannt.education` (placeholder production origin until DNS is attached). Canonical URLs, Open Graph, Twitter cards, `robots.txt`, and `sitemap.xml` use that origin.
-
-- Titles follow `{page} | Anannt AP Calculus AB`
-- JSON-LD: Organization, Course, EducationalOccupationalProgram, BreadcrumbList, FAQ
-- Do not claim College Board endorsement, accreditation, or AP score predictions in metadata or copy
-
-## Exam configuration (2027)
-
-| Part | Questions | Time | Calculator |
-|---|---:|---:|---|
-| I A | 29 | 62 min | not permitted |
-| I B | 13 | 38 min | required |
-| II A | 2 FRQ | 30 min | required |
-| II B | 4 FRQ | 60 min | not permitted |
-
-The mock centre offers a **short labelled drill** and a **full 2027 structure** mode (official counts and timers; some later items may be skippable placeholders).
-
-Practice composite: `50 * MCQ_correct/42 + 50 * FRQ_points/FRQ_available`.
-
-## Mastery (pilot)
-
-States: unknown → learning → developing → independently demonstrated → retained. Failed later retrieval becomes **review due**. Assisted attempts and same-item-family repeats cannot independently satisfy mastery. Sparse evidence is **insufficient evidence**, never a fake percentage.
+Curriculum is original Anannt-authored. Do not copy College Board released items into this bank.
 
 ## Stack
 
-Next.js (App Router), TypeScript, Tailwind CSS, shadcn/ui, KaTeX. No extra component libraries, no database, no unrestricted AI chat.
+Next.js 16 App Router (`proxy.ts` for the study gate), TypeScript, Tailwind CSS, shadcn/ui, KaTeX.

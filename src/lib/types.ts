@@ -62,7 +62,9 @@ export type Confidence = "low" | "medium" | "high";
 export type FeedbackLevel = "self-review" | "provisional" | "faculty-reviewed";
 
 export type AnalyticsEventName =
+  | "diagnostic_start"
   | "diagnostic_completed"
+  | "lesson2_complete"
   | "lesson_check_submitted"
   | "hint_used"
   | "independent_check_passed"
@@ -70,7 +72,8 @@ export type AnalyticsEventName =
   | "review_completed"
   | "mock_submitted"
   | "grade_reviewed"
-  | "issue_reported";
+  | "issue_reported"
+  | "wa_click";
 
 export interface SourceRecord {
   title: string;

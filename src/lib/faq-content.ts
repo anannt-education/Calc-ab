@@ -1,7 +1,7 @@
 export const FAQS: { q: string; a: string }[] = [
   {
-    q: "Does Anannt guarantee an AP score?",
-    a: "No. We do not predict AP scores and we do not guarantee a 3, 4, or 5. Progress is reported as coverage, independent evidence, retention, and (after a mock) an internal Anannt practice composite. Those are not College Board scores.",
+    q: "Does Anannt predict an AP score?",
+    a: "No. We do not predict AP scores. Progress is reported as coverage, independent evidence, retention, and (after a mock) an internal Anannt practice composite. Those are not College Board scores.",
   },
   {
     q: "Is Anannt affiliated with College Board?",
