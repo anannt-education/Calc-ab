@@ -19,8 +19,10 @@ export default function PrivacyPage() {
         Privacy (this demo)
       </h1>
       <p className="mt-3 text-base leading-relaxed">
-        This public slice is a local demo. There is no login wall. Progress, attempts, mistake notes,
-        and simulated FRQ uploads are stored in your browser under the key{" "}
+        This public slice is a local demo. Lessons 1 and 2 have no account wall. Lessons 3 and 4
+        (chain rule, related rates) need the study session cookie set after the form on
+        study.anannt.ae/start. Progress, attempts, mistake notes, and simulated FRQ uploads are stored
+        in your browser under the key{" "}
         <code>anannt-ab-student-v1</code>. Clearing site data removes them. We do not open an Anannt
         account for you by visiting.
       </p>

@@ -7,7 +7,12 @@ Two public lessons, no account:
 1. Limit versus function value (`/lesson/u1-limit-vs-value`)
 2. FTC and accumulation (`/lesson/u6-ftc`)
 
-After lesson 2, a diagnostic submit, or a visit to `/practice`, `/frq`, or `/mock`, this app redirects to `https://study.anannt.ae/start?subject=calculus-ab` (with `unit` when known). The study shell owns the gate form (first name, email OTP, parent WhatsApp required, role, age band, sitting May 2027, school type, intent, consent). Remaining units, mocks, and FRQ need the `anannt_study_session` cookie and are `noindex`.
+Gated (session cookie `anannt_study_session`, `noindex`):
+
+3. Chain rule (`/lesson/u3-chain`)
+4. Related rates (`/lesson/u4-related-rates`)
+
+Unauthenticated visits to 3–4, remaining units, `/practice`, `/frq`, or `/mock` 307 to `https://study.anannt.ae/start?subject=calculus-ab` (with `unit` when known). The study shell owns the gate form (first name, email OTP, parent WhatsApp required, role, age band, sitting May 2027, school type, intent, consent). This is not a published eight-unit course.
 
 This is not affiliated with or endorsed by College Board. Practice composites are internal percentages, not official AP scores. The eight-unit map is still being written.
 
@@ -31,7 +36,7 @@ Progress is stored in the browser (`localStorage` key `anannt-ab-student-v1`).
 
 ## SEO
 
-`metadataBase` / canonical / OG origin: `https://study.anannt.ae`. Public URLs are under `/calculus-ab`. `robots.txt` allows the subject home and lessons 1–2; it disallows `/mock`, `/api`, `/keys`. The sitemap lists public URLs only.
+`metadataBase` / canonical / OG origin: `https://study.anannt.ae`. Public URLs are under `/calculus-ab`. `robots.txt` allows the subject home and lessons 1–2; it disallows gated lessons 3–4, `/mock`, `/api`, `/keys`. The sitemap lists public URLs only (not 3–4).
 
 Curriculum is original Anannt-authored. Do not copy College Board released items into this bank.
 

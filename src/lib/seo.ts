@@ -3,7 +3,7 @@ import { LESSON_1_ID, LESSON_2_ID } from "./gate";
 
 /** Unique 150–160 character descriptions for public URLs. */
 export const PUBLIC_DESCRIPTIONS = {
-  home: "Two free Calculus AB lessons: why a limit is not a function value, then FTC accumulation. No account. Anannt Education, Burjuman, Dubai. May 2027 sitting.",
+  home: "Two free Calculus AB lessons: why a limit is not a function value, then FTC accumulation. No account. Two more wait behind a short form. Anannt, Dubai.",
   lesson1:
     "A limit is nearby behaviour, not the filled-in point. First public Calculus AB lesson from Anannt Education in Dubai. No account. For the May 2027 sitting.",
   lesson2:
@@ -17,7 +17,7 @@ export const PUBLIC_DESCRIPTIONS = {
   faculty:
     "Who writes Anannt Calculus AB lessons and how two-person faculty review works. Independent of College Board. Self-study studio in Burjuman, Dubai, UAE.",
   course:
-    "Two public Calculus AB lessons are open. The eight-unit map is still being written. Anannt Education, Dubai. No account needed for lessons one and two.",
+    "Two public Calculus AB lessons are open. Chain rule and related rates wait behind a short form. The eight-unit map is still being written. Anannt, Dubai.",
   onboarding:
     "Start a short Calculus AB placement check. It chooses where to begin; it does not certify the course. After you submit, we ask a parent WhatsApp in Dubai.",
   unit1:
@@ -26,6 +26,7 @@ export const PUBLIC_DESCRIPTIONS = {
     "Unit 6 accumulation: the public FTC lesson is open without an account. Later integral work waits until after two lessons. Anannt Education, Dubai, UAE.",
 } as const;
 
+/** Public URLs only. Gated lessons 3–4 (`u3-chain`, `u4-related-rates`) are not listed. */
 export const PUBLIC_SITEMAP_PATHS = [
   "/",
   "/exam/2027",

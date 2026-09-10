@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { AcademicMethod } from "@/components/AcademicMethod";
 import { buttonVariants } from "@/components/ui/button";
-import { LESSON_1_ID, LESSON_2_ID } from "@/lib/gate";
+import { GATED_HONESTY, GATED_LESSON_META, LESSON_1_ID, LESSON_2_ID } from "@/lib/gate";
 import { buildMetadata } from "@/lib/site";
 import { PUBLIC_DESCRIPTIONS } from "@/lib/seo";
 
@@ -60,6 +60,23 @@ export default function Home() {
         </li>
       </ol>
 
+      <ol className="mt-4 space-y-4" aria-label="Lessons behind the study form">
+        {GATED_LESSON_META.map((lesson) => (
+          <li key={lesson.id} className="rounded-2xl border border-dashed border-rule bg-card p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">{lesson.kicker}</p>
+            <h2 className="mt-1 font-[family-name:var(--font-playfair)] text-2xl text-ink">{lesson.title}</h2>
+            <p className="mt-2 text-sm text-ink-muted">{lesson.blurb}</p>
+            <Link
+              href={`/lesson/${lesson.id}`}
+              className={`${buttonVariants({ variant: "outline" })} mt-4 inline-flex`}
+            >
+              Continue after a short form
+            </Link>
+          </li>
+        ))}
+      </ol>
+      <p className="mt-3 text-sm text-ink-muted">{GATED_HONESTY}</p>
+
       <p className="mt-8 rounded-xl border border-rule bg-card p-4 text-sm text-ink-muted">
         This is written for a student with a quiet hour in Dubai, Sharjah, Abu Dhabi, or anywhere. If
         today is a bad brain day, stop after the worked example. Come back tomorrow. The path will
@@ -71,7 +88,7 @@ export default function Home() {
           2027 exam guide
         </Link>
         <Link href="/course" className="text-navy underline-offset-2 hover:underline">
-          Honesty map (two lessons open)
+          Honesty map (two public; two behind the form)
         </Link>
         <Link href="/onboarding" className="text-navy underline-offset-2 hover:underline">
           Start a short diagnostic

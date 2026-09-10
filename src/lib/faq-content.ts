@@ -28,6 +28,10 @@ export const FAQS: { q: string; a: string }[] = [
     a: "Unless a mentor is present, mocks are self-administered. We can turn off hints and Ask Anannt. We cannot see whether a student used an external aid at home. Reports say so.",
   },
   {
+    q: "Can I open the chain-rule or related-rates lesson without an account?",
+    a: "No. Lessons 1 and 2 — limit versus function value, then FTC accumulation — are open with no account. Lessons 3 (chain rule) and 4 (related rates) wait behind a short form at study.anannt.ae/start. That is not a published eight-unit course, and this studio does not predict an AP score.",
+  },
+  {
     q: "Does this course include AP Calculus BC topics?",
     a: "Not as required AB mastery. Shared unit numbers sometimes contain BC-only ideas (for example Euler’s method or logistic models). Those stay labelled optional and out of default AB assignments.",
   },

@@ -44,6 +44,7 @@ export function courseJsonLd() {
     educationalLevel: "High School",
     teaches: "Calculus AB — limits, differentiation, integration",
     inLanguage: "en",
+    isAccessibleForFree: true,
     hasCourseInstance: {
       "@type": "CourseInstance",
       name: "Calculus AB — May 2027 self-prep",

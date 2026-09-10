@@ -12,8 +12,8 @@ import { LESSON_BY_ID, LESSONS, SKILL_BY_ID, UNIT_BY_ID } from "@/lib/content";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { facultyById } from "@/lib/faculty";
 import { buildMetadata, plainText } from "@/lib/site";
-import { LESSON_1_ID, LESSON_2_ID, isPublicLessonId } from "@/lib/gate";
-import { PUBLIC_DESCRIPTIONS } from "@/lib/seo";
+import { LESSON_1_ID, LESSON_2_ID, LESSON_3_ID, LESSON_4_ID, isPublicLessonId, isGatedLessonId, whatsappHelpUrl } from "@/lib/gate";
+import { PUBLIC_DESCRIPTIONS, gatedMetadata } from "@/lib/seo";
 
 const SHORT_TITLE: Record<string, string> = {
   "u1-limit-vs-value": "Limit versus function value",
@@ -71,6 +71,15 @@ export async function generateMetadata({
       path: `/lesson/${id}`,
       type: "article",
     });
+  }
+  if (isGatedLessonId(id)) {
+    return gatedMetadata(
+      SHORT_TITLE[lesson.id] ?? lesson.title,
+      plainText(
+        `${lesson.title}. ${lesson.objective} Gated Calculus AB lesson. Session required. Anannt Education, Dubai.`
+      ),
+      `/lesson/${id}`
+    );
   }
   return buildMetadata({
     title: SHORT_TITLE[lesson.id] ?? lesson.title,
@@ -199,6 +208,37 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
         </p>
       )}
       {id === LESSON_2_ID && <Lesson2Continue />}
+      {id === LESSON_3_ID && (
+        <section className="mt-10 rounded-2xl border border-rule bg-paper-soft p-5">
+          <h2 className="font-[family-name:var(--font-playfair)] text-xl text-ink">After this lesson</h2>
+          <p className="mt-2 text-sm text-ink-muted">
+            The extra chain factor is the same idea in a situation: when a radius changes with time,
+            area changes through that inner derivative. That is lesson 4 — still behind the form,
+            not a published Unit 3–4 course.
+          </p>
+          <Link
+            href={`/lesson/${LESSON_4_ID}`}
+            className="mt-4 inline-flex text-sm font-medium text-primary underline-offset-2 hover:underline"
+          >
+            Next gated lesson: related rates
+          </Link>
+        </section>
+      )}
+      {id === LESSON_4_ID && (
+        <section className="mt-10 rounded-2xl border border-rule bg-paper-soft p-5">
+          <h2 className="font-[family-name:var(--font-playfair)] text-xl text-ink">After this lesson</h2>
+          <p className="mt-2 text-sm text-ink-muted">
+            This handwriting is what a marked mock needs. The eight-unit map is still being written.
+            A person at Office 105 can sit with the paper if you want one.
+          </p>
+          <a
+            href={whatsappHelpUrl("mocks")}
+            className="mt-4 inline-flex text-sm font-medium text-primary underline-offset-2 hover:underline"
+          >
+            WhatsApp Burjuman · marked mock
+          </a>
+        </section>
+      )}
 
       <nav aria-label="Related lessons" className="mt-10 border-t pt-6">
         <h2 className="text-base font-semibold text-primary">Related in this unit</h2>

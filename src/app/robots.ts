@@ -1,5 +1,14 @@
 import type { MetadataRoute } from "next";
 import { BASE_PATH, SITE_URL } from "@/lib/site";
+import { GATED_LESSON_IDS, LESSON_1_ID, LESSON_2_ID } from "@/lib/gate";
+
+const publicLessons = [LESSON_1_ID, LESSON_2_ID];
+const gatedLessonDisallow = GATED_LESSON_IDS.flatMap((id) => [
+  `/lesson/${id}`,
+  `/lesson/${id}/`,
+  `${BASE_PATH}/lesson/${id}`,
+  `${BASE_PATH}/lesson/${id}/`,
+]);
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -10,14 +19,12 @@ export default function robots(): MetadataRoute.Robots {
           "/",
           `${BASE_PATH}$`,
           `${BASE_PATH}/`,
-          `${BASE_PATH}/lesson/u1-limit-vs-value`,
-          `${BASE_PATH}/lesson/u6-ftc`,
+          ...publicLessons.flatMap((id) => [`${BASE_PATH}/lesson/${id}`, `/lesson/${id}`]),
           `${BASE_PATH}/exam/2027`,
-          "/lesson/u1-limit-vs-value",
-          "/lesson/u6-ftc",
           "/exam/2027",
         ],
         disallow: [
+          ...gatedLessonDisallow,
           "/mock",
           "/mock/",
           "/api",
