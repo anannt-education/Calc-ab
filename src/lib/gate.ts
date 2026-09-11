@@ -15,7 +15,7 @@ export const GATED_LESSON_META = [
   {
     id: LESSON_3_ID,
     unit: "u3",
-    kicker: "Later sitting"
+    kicker: "Later sitting",
     title: "Chain rule",
     blurb:
       "Annotate the inner function, differentiate the outer, then multiply by the inner derivative. The extra factor is the next sentence after accumulation with a nested limit.",
@@ -23,7 +23,7 @@ export const GATED_LESSON_META = [
   {
     id: LESSON_4_ID,
     unit: "u4",
-    kicker: "Later sitting"
+    kicker: "Later sitting",
     title: "Related rates",
     blurb:
       "Write the relating equation, differentiate with respect to time, then substitute. Chain rule in a situation — handwriting for a marked mock.",
