@@ -28,7 +28,7 @@ export function courseJsonLd() {
     "@type": "Course",
     name: "Calculus AB self-study studio",
     description:
-      "Independent, faculty-reviewed self-study for AP Calculus AB (May 2027). Two public lessons are open without an account. Not affiliated with College Board. Does not predict an official AP score.",
+      "Independent, faculty-reviewed self-study for AP Calculus AB (May 2027). Start with why a limit is not a function value. Not affiliated with College Board. Does not predict an official AP score.",
     url: `${SITE_URL}${BASE_PATH}`,
     provider: {
       "@type": "EducationalOrganization",

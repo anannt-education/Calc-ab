@@ -15,7 +15,7 @@ export const GATED_LESSON_META = [
   {
     id: LESSON_3_ID,
     unit: "u3",
-    kicker: "Lesson 3 · after a short form",
+    kicker: "Later sitting"
     title: "Chain rule",
     blurb:
       "Annotate the inner function, differentiate the outer, then multiply by the inner derivative. The extra factor is the next sentence after accumulation with a nested limit.",
@@ -23,15 +23,14 @@ export const GATED_LESSON_META = [
   {
     id: LESSON_4_ID,
     unit: "u4",
-    kicker: "Lesson 4 · after a short form",
+    kicker: "Later sitting"
     title: "Related rates",
     blurb:
       "Write the relating equation, differentiate with respect to time, then substitute. Chain rule in a situation — handwriting for a marked mock.",
   },
 ] as const;
 
-export const GATED_HONESTY =
-  "Two public lessons. A third and fourth wait behind a short form. The eight-unit map is still being written.";
+export const GATED_HONESTY = "The eight-unit map is still being written.";
 
 /** Cookie study sets on study.anannt.ae after OTP verify. Subject apps only check it. */
 export const SESSION_COOKIE = "anannt_study_session";
