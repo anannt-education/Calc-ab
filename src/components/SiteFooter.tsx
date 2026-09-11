@@ -32,7 +32,7 @@ export function SiteFooter() {
             ))}
             <li>
               <a href={`${SITE_URL}/start?subject=calculus-ab`} className="underline-offset-2 hover:underline">
-                After two lessons
+                Tell us who is sitting
               </a>
             </li>
             <li>

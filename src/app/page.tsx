@@ -7,7 +7,7 @@ import { buildMetadata } from "@/lib/site";
 import { PUBLIC_DESCRIPTIONS } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Calculus AB · two free lessons",
+  title: "Why a limit is not a function value",
   description: PUBLIC_DESCRIPTIONS.home,
   path: "/",
 });
@@ -16,24 +16,24 @@ export default function Home() {
   return (
     <div className="mx-auto max-w-3xl">
       <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">
-        Self-prep studio · May 2027 exams
+        Anannt Education · May 2027
       </p>
       <h1 className="mt-3 font-[family-name:var(--font-playfair)] text-4xl leading-tight tracking-tight text-ink sm:text-5xl">
-        Calculus AB, two honest lessons first.
+        Why a limit is not a function value.
       </h1>
       <p className="mt-5 text-lg leading-relaxed text-ink-muted">
-        Nobody should have to guess what to study tonight. These guides walk you through one idea, a
-        short check, and what to do next — written by people who have sat with Dubai students. The
-        first two lessons are open. No account. No pitch.
+        College will not wait while you find last year’s notes. These pages are the work we already
+        do with students in Burjuman — one idea, a check, the next page. Start with the hole in the
+        graph. No account to begin.
       </p>
       <p className="mt-3 text-sm text-ink-muted">
-        We would rather you learn the limit than buy a package. A mentor in Burjuman is here if you
-        want one later.
+        If you want a person in the room later, we are at Office 105, Bank Street Building, Burjuman
+        Metro Exit 2. You do not need us to begin.
       </p>
 
       <ol className="mt-10 space-y-4">
         <li className="rounded-2xl border border-rule bg-paper-soft p-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Lesson 1 · public</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Lesson 1</p>
           <h2 className="mt-1 font-[family-name:var(--font-playfair)] text-2xl text-ink">
             Limit versus function value
           </h2>
@@ -42,11 +42,11 @@ export default function Home() {
             nearby graph fixed — then say what actually changed.
           </p>
           <Link href={`/lesson/${LESSON_1_ID}`} className={`${buttonVariants()} mt-4 inline-flex bg-ink text-paper hover:bg-navy`}>
-            Start lesson 1 — free, no account
+            Start here
           </Link>
         </li>
         <li className="rounded-2xl border border-rule bg-paper-soft p-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Lesson 2 · public</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Lesson 2</p>
           <h2 className="mt-1 font-[family-name:var(--font-playfair)] text-2xl text-ink">
             FTC and accumulation
           </h2>
@@ -55,22 +55,22 @@ export default function Home() {
             negative, then check it.
           </p>
           <Link href={`/lesson/${LESSON_2_ID}`} className={`${buttonVariants({ variant: "outline" })} mt-4 inline-flex`}>
-            Open lesson 2
+            Open FTC and accumulation
           </Link>
         </li>
       </ol>
 
-      <ol className="mt-4 space-y-4" aria-label="Lessons behind the study form">
+      <ol className="mt-4 space-y-4" aria-label="Later sittings">
         {GATED_LESSON_META.map((lesson) => (
           <li key={lesson.id} className="rounded-2xl border border-dashed border-rule bg-card p-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">{lesson.kicker}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Later sitting</p>
             <h2 className="mt-1 font-[family-name:var(--font-playfair)] text-2xl text-ink">{lesson.title}</h2>
             <p className="mt-2 text-sm text-ink-muted">{lesson.blurb}</p>
             <Link
               href={`/lesson/${lesson.id}`}
               className={`${buttonVariants({ variant: "outline" })} mt-4 inline-flex`}
             >
-              Continue after a short form
+              Open {lesson.title.toLowerCase()}
             </Link>
           </li>
         ))}
@@ -88,7 +88,7 @@ export default function Home() {
           2027 exam guide
         </Link>
         <Link href="/course" className="text-navy underline-offset-2 hover:underline">
-          Honesty map (two public; two behind the form)
+          Honesty map
         </Link>
         <Link href="/onboarding" className="text-navy underline-offset-2 hover:underline">
           Start a short diagnostic

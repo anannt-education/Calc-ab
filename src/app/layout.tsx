@@ -38,7 +38,7 @@ const homeUrl = absoluteUrl("/");
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Calculus AB · two free lessons | Anannt Study",
+    default: "Why a limit is not a function value | Anannt Study",
     template: "%s | Anannt Study",
   },
   description: PUBLIC_DESCRIPTIONS.home,
@@ -59,12 +59,12 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     locale: "en_US",
     url: homeUrl,
-    title: "Calculus AB · two free lessons | Anannt Study",
+    title: "Why a limit is not a function value | Anannt Study",
     description: PUBLIC_DESCRIPTIONS.home,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Calculus AB · two free lessons | Anannt Study",
+    title: "Why a limit is not a function value | Anannt Study",
     description: PUBLIC_DESCRIPTIONS.home,
   },
   robots: { index: true, follow: true },

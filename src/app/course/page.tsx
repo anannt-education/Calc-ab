@@ -18,18 +18,18 @@ import {
 } from "@/lib/gate";
 
 const PUBLIC_LESSONS = [
-  { id: LESSON_1_ID, kicker: "Lesson 1 · public" },
-  { id: LESSON_2_ID, kicker: "Lesson 2 · public" },
+  { id: LESSON_1_ID, kicker: "Lesson 1" },
+  { id: LESSON_2_ID, kicker: "Lesson 2" },
 ];
 
 export default function CoursePage() {
   const { state } = useStudent();
   return (
     <div>
-      <PageTitle kicker="Honesty map" title="Two public lessons. Eight-unit map still being written.">
-        Limits and FTC are open without an account. Chain rule and related rates wait behind a short
-        form. Later units exist as faculty drafts in this studio; they are not a published eight-unit
-        course. After lesson 2 we ask for email and a parent WhatsApp on study.anannt.ae.
+      <PageTitle kicker="Honesty map" title="The eight-unit map is still being written.">
+        Start with why a limit is not a function value, then FTC accumulation. Chain rule and related
+        rates are later sittings. Later units exist as faculty drafts in this studio; they are not a
+        published eight-unit course.
       </PageTitle>
 
       <ol className="space-y-4">
@@ -67,7 +67,7 @@ export default function CoursePage() {
               <h2 className="mt-1 text-lg font-semibold text-ink">{lesson.title}</h2>
               <p className="mt-2 text-sm">{lesson.objective.replace(/\$/g, "")}</p>
               <Link href={`/lesson/${meta.id}`} className={cn(buttonVariants({ size: "sm", variant: "outline" }), "mt-3 inline-flex")}>
-                Opens after the study form
+                Open this sitting
               </Link>
             </li>
           );
@@ -107,7 +107,7 @@ export default function CoursePage() {
           })}
         </ul>
         <a href={studyStartUrl()} className={cn(buttonVariants({ variant: "outline" }), "mt-4 inline-flex")}>
-          After two lessons — continue on study
+          Tell us who is sitting
         </a>
       </section>
     </div>
